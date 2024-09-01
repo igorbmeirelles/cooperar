@@ -1,5 +1,3 @@
-import { Cooperar } from "@/components/icons/logo/cooperar";
-import { Logo } from "@/components/icons/logo/logo";
 import {
   BuildingIcon,
   LayoutDashboardIcon,
@@ -7,62 +5,39 @@ import {
   TableIcon,
   UtensilsCrossed,
 } from "lucide-react";
-import Link from "next/link";
+import { Header } from "./header";
+import { NavLink } from "./navLink";
+import { LinkWrapper } from "./linkWrapper";
+import { NavContainer } from "./navContainer";
+import { Root } from "./root";
+import { Link } from "./models/link";
+import { useMemo } from "react";
 
 export function SideNavigation() {
+  const links = useMemo(
+    () => [
+      new Link("/dashboard", "Dashboard", true, LayoutDashboardIcon),
+      new Link("/dashboard", "Controle de fornecimento", false, PackageIcon),
+      new Link("/dashboard", "Tabela per capta", false, TableIcon),
+      new Link("/dashboard", "Instituições", false, BuildingIcon),
+      new Link("/dashboard", "Alimentos", false, UtensilsCrossed),
+    ],
+    []
+  );
+
   return (
-    <aside className={"bg-glass row-span-2 pl-8 pr-4 pt-6"}>
-      <div className="flex gap-2 items-center justify-center mb-8">
-        <Logo />
-        <Cooperar />
-      </div>
-      <ul>
-        <li className="mb-2">
-          <Link
-            href="/dashboard"
-            className="flex gap-2 rounded-full px-4 py-2 text-white font-small bg-primary"
-          >
-            <LayoutDashboardIcon />
-            Dashboard
-          </Link>
-        </li>
-        <li className="mb-2">
-          <Link
-            href="/dashboard"
-            className="flex gap-2 rounded-full px-4 py-2 font-small hover:bg-gray-50/10"
-          >
-            <PackageIcon />
-            Controle de fornecimento
-          </Link>
-        </li>
-        <li className="mb-2">
-          <Link
-            href="/dashboard"
-            className="flex gap-2 rounded-full px-4 py-2 font-small hover:bg-gray-50/10"
-          >
-            <TableIcon />
-            Tabela per capta
-          </Link>
-        </li>
-        <li className="mb-2">
-          <Link
-            href="/dashboard"
-            className="flex gap-2 rounded-full px-4 py-2 font-small hover:bg-gray-50/10"
-          >
-            <BuildingIcon />
-            Instituições
-          </Link>
-        </li>
-        <li className="mb-2">
-          <Link
-            href="/dashboard"
-            className="flex gap-2 rounded-full px-4 py-2 font-small hover:bg-gray-50/10"
-          >
-            <UtensilsCrossed />
-            Alimentos
-          </Link>
-        </li>
-      </ul>
-    </aside>
+    <Root>
+      <Header />
+      <NavContainer>
+        {links.map((link) => (
+          <LinkWrapper className="mb-2" key={link.href}>
+            <NavLink href={link.href} active={link.active}>
+              <link.icon />
+              {link.title}
+            </NavLink>
+          </LinkWrapper>
+        ))}
+      </NavContainer>
+    </Root>
   );
 }
