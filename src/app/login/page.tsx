@@ -1,5 +1,5 @@
 import { Logo } from "@/components/icons/logo/logo";
-import { Login } from "./components";
+import { Login } from "./_components";
 import { Cooperar } from "@/components/icons/logo/cooperar";
 
 export default function Page() {

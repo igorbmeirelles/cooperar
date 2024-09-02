@@ -1,5 +1,5 @@
-import { InfoCard } from "./components/infoCard";
-import { MovementCard } from "./components/movementsCard";
+import { InfoCard } from "./_components/infoCard";
+import { MovementCard } from "./_components/movementsCard";
 
 export function HomePage() {
   return (
