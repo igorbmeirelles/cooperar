@@ -6,7 +6,7 @@ type ValidLinks =
   | "Controle de fornecimento"
   | "Tabela per capta"
   | "Instituições"
-  | "Alimentos";
+  | "Culturas";
 
 export class Link {
   constructor(

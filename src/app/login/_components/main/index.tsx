@@ -1,3 +1,5 @@
+import style from "../../styles.module.css";
+
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function Main({ children, className = "", ...props }: IProps) {

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BuildingIcon,
   LayoutDashboardIcon,
@@ -17,16 +19,16 @@ export function SideNavigation() {
   const links = useMemo(
     () => [
       new Link("/dashboard", "Dashboard", true, LayoutDashboardIcon),
-      new Link("/dashboard", "Controle de fornecimento", false, PackageIcon),
-      new Link("/dashboard", "Tabela per capta", false, TableIcon),
-      new Link("/dashboard", "Instituições", false, BuildingIcon),
-      new Link("/dashboard", "Alimentos", false, UtensilsCrossed),
+      new Link("/controle", "Controle de fornecimento", false, PackageIcon),
+      new Link("/percapta", "Tabela per capta", false, TableIcon),
+      new Link("/instituicoes", "Instituições", false, BuildingIcon),
+      new Link("/culturas", "Culturas", false, UtensilsCrossed),
     ],
     []
   );
 
   return (
-    <Root>
+    <Root data-cy="sidebar">
       <Header />
       <NavContainer>
         {links.map((link) => (

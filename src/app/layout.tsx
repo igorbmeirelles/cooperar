@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./_context/providers";
+import { CookiesProvider } from "next-client-cookies/server";
+import { Layout } from "@/components/ui/default";
 
 const poppins = Poppins({
   weight: ["400", "300", "200", "100", "500", "600", "700"],
@@ -19,7 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <CookiesProvider>
+          <Providers>{children}</Providers>
+        </CookiesProvider>
+      </body>
     </html>
   );
 }
