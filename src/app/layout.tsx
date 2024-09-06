@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./_context/providers";
 import { CookiesProvider } from "next-client-cookies/server";
 import { Layout } from "@/components/ui/default";
+import { headers } from "next/headers";
 
 const poppins = Poppins({
   weight: ["400", "300", "200", "100", "500", "600", "700"],
@@ -20,11 +21,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const aHeadersList = headers();
+
+  const pathname = aHeadersList.get("x-current-path");
+
+  const isLoginPage = pathname?.includes("/login");
+  
   return (
     <html lang="en">
       <body className={poppins.className}>
         <CookiesProvider>
-          <Providers>{children}</Providers>
+          <Providers>
+            {isLoginPage ? children : <Layout>{children}</Layout>}
+          </Providers>
         </CookiesProvider>
       </body>
     </html>
