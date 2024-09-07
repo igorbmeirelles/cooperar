@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import {
   BuildingIcon,
   LayoutDashboardIcon,
+  LogOutIcon,
   PackageIcon,
   TableIcon,
   UtensilsCrossed,
@@ -11,9 +12,10 @@ import { NavLink } from "./navLink";
 import { LinkWrapper } from "./linkWrapper";
 import { NavContainer } from "./navContainer";
 import { Root } from "./root";
-import { Link, TValidLinks } from "./models/link";
+import { Link, TValidLink } from "./models/link";
 import { useMemo } from "react";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/app/_context/auth";
 
 export function SideNavigation() {
   const links = useMemo(
@@ -27,10 +29,14 @@ export function SideNavigation() {
     []
   );
 
-  const path = usePathname() as TValidLinks;
+  const SignOutLink = new Link("/login", "Sair", LogOutIcon);
+
+  const path = usePathname() as TValidLink;
+
+  const { signOut } = useAuth();
 
   return (
-    <Root data-cy="sidebar">
+    <Root data-cy="sidebar" className="flex flex-col">
       <Header />
       <NavContainer>
         {links.map((link) => (
@@ -42,6 +48,10 @@ export function SideNavigation() {
           </LinkWrapper>
         ))}
       </NavContainer>
+      <a onClick={signOut} className="mt-auto">
+        <SignOutLink.icon />
+        {SignOutLink.title}
+      </a>
     </Root>
   );
 }
