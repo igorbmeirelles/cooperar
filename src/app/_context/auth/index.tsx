@@ -84,18 +84,18 @@ export const AuthProvider = ({ children }: IProps) => {
 
   const signOut = useCallback(async () => {
     await auth.signOut();
-    setUser(null);
-  }, [setUser]);
+    clearState();
+  }, [clearState]);
 
   useEffect(() => {
     onChange(auth, (user) => {
       if (user) {
         saveUserState(user);
       }
-      clearState;
-      setUser(null);
+      clearState();
     });
   }, [saveUserState, clearState]);
+
   return (
     <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
