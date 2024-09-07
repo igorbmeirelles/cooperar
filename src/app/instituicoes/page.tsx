@@ -1,6 +1,6 @@
 "use client";
 
-import { Institutions } from "./components";
+import { Institutions } from "./_components";
 
 export default function Page() {
   return <Institutions />;
