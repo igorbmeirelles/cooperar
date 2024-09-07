@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export default function middleware(request: NextRequest) {
+  if (aMiddlewareUtility.isInSafeRouteWithoutAuthentication(request))
+    return NextResponse.redirect(new URL("/login", request.url));
+
   if (aMiddlewareUtility.isLoginPathWithAuthentication(request))
     return NextResponse.redirect(new URL("/", request.url));
 
@@ -26,6 +29,10 @@ const aMiddlewareUtility = {
   },
   isAuthenticated: (request: NextRequest) => {
     return !!request.cookies.get("auth");
+  },
+  isInSafeRouteWithoutAuthentication: (request: NextRequest) => {
+    console.log(request.cookies.get("auth"), isLoginPage(request));
+    return !request.cookies.get("auth") && !isLoginPage(request);
   },
 };
 

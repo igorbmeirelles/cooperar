@@ -12,7 +12,8 @@ describe("Login Page", () => {
     cy.get("[data-cy=login-activator]").click();
 
     cy.wait("@sign-in").then(({ response }) => {
-      cy.url().should("eq", `${Cypress.config("baseUrl")}/`);
+      cy.url().should("eq", `${Cypress.config("baseUrl")}/home`);
+      cy.get("[data-cy=layout]").should("exist");
     });
   });
 
@@ -51,11 +52,11 @@ describe("Login Page", () => {
     cy.get("[data-cy=login-activator]").click();
 
     cy.wait("@sign-in").then(({ response }) => {
-      cy.url().should("eq", `${Cypress.config("baseUrl")}/`);
+      cy.url().should("eq", `${Cypress.config("baseUrl")}/home`);
 
       cy.visit("/login");
 
-      cy.url().should("eq", `${Cypress.config("baseUrl")}/`);
+      cy.url().should("eq", `${Cypress.config("baseUrl")}/home`);
     });
   });
 
@@ -64,5 +65,12 @@ describe("Login Page", () => {
 
     cy.get("[data-cy=header]").should("not.exist");
     cy.get("[data-cy=sidebar]").should("not.exist");
+  });
+
+  it("Should not be able to see a safe page if not logged in", () => {
+    cy.visit("/instituicoes");
+
+    cy.url().should("eq", `${Cypress.config("baseUrl")}/login`);
+    cy.get("[data-cy=layout]").should("not.exist");
   });
 });

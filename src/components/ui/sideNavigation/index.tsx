@@ -48,10 +48,10 @@ export function SideNavigation() {
           </LinkWrapper>
         ))}
       </NavContainer>
-      <a onClick={signOut} className="mt-auto">
+      <NavLink onClick={signOut} href={SignOutLink.href} className="mt-auto">
         <SignOutLink.icon />
         {SignOutLink.title}
-      </a>
+      </NavLink>
     </Root>
   );
 }

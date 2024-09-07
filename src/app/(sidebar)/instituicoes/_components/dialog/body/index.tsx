@@ -1,7 +1,7 @@
 import { Form } from "@/components/ui/form";
 import { DialogActions } from "../actions";
 import { UseFormReturn } from "react-hook-form";
-import { IInstitution } from "@/app/instituicoes/_context/modes/Institution";
+import { IInstitution } from "@/app/(sidebar)/instituicoes/_context/modes/Institution";
 import { Fields } from "./fields";
 
 interface IProps {

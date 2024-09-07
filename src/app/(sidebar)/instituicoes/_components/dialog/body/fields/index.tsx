@@ -1,4 +1,4 @@
-import { IInstitution } from "@/app/instituicoes/_context/modes/Institution";
+import { IInstitution } from "@/app/(sidebar)/instituicoes/_context/modes/Institution";
 import { UseFormReturn } from "react-hook-form";
 import { NameInput } from "../../../form/nameInput";
 import { EmailInput } from "../../../form/emailInput";
