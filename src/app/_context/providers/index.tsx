@@ -1,5 +1,10 @@
+import { InstitutionsProvider } from "@/app/instituicoes/_context/useInstitutions";
 import { AuthProvider } from "../auth";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <AuthProvider>
+      <InstitutionsProvider>{children}</InstitutionsProvider>
+    </AuthProvider>
+  );
 }
