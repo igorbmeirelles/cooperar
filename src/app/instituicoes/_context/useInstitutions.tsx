@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, PropsWithChildren, useContext, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { IInstitution } from "./modes/Institution";
 import {
   ApplicationException,
@@ -17,10 +23,16 @@ const InstitutionContext = createContext<IInstitutionContext>({
 });
 
 interface IProps extends PropsWithChildren<{}> {}
+
 export function InstitutionsProvider({ children }: IProps) {
-  const [someInstitutions, setSomeInstitutions] = useState<IInstitution[]>(
-    JSON.parse(localStorage.getItem("institutions") ?? "[]")
-  );
+  const [someInstitutions, setSomeInstitutions] = useState<IInstitution[]>([]);
+
+  useEffect(() => {
+    const institutions = JSON.parse(
+      localStorage.getItem("institutions") ?? "[]"
+    );
+    setSomeInstitutions(institutions);
+  }, []);
 
   const writeInstitutions = (anInstitutionsList: IInstitution[]) => {
     localStorage.setItem("institutions", JSON.stringify(anInstitutionsList));
