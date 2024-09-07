@@ -22,17 +22,17 @@ const aMiddlewareUtility = {
       return !!request.cookies.get("auth");
     };
 
-    const isLoginPage = (request: NextRequest) => {
-      console.log(request.url);
-      return request.url.includes("/login");
-    };
-
     return hasAuthCookie(request) && isLoginPage(request);
+  },
+  isAuthenticated: (request: NextRequest) => {
+    return !!request.cookies.get("auth");
   },
 };
 
+function isLoginPage(request: NextRequest) {
+  return request.nextUrl.pathname.includes("/login");
+}
+
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
