@@ -14,7 +14,7 @@ export function NavLink({
 }: IProps) {
   return (
     <Link
-      className={`flex gap-2 rounded-full px-4 py-2 ${
+      className={`flex gap-2 rounded-full px-4 py-2 transition-all ${
         active ? "text-white" : ""
       }  font-small  ${active ? "bg-primary" : "hover:bg-gray-50/10"}`}
       {...props}
