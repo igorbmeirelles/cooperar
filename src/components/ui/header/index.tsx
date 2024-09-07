@@ -1,5 +1,4 @@
 import { UserInfo } from "../userInfo";
-
 export function Header() {
   return (
     <header className="flex pt-4" data-cy="header">
