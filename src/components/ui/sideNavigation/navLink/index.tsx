@@ -16,7 +16,9 @@ export function NavLink({
     <Link
       className={`flex gap-2 rounded-full px-4 py-2 transition-all ${
         active ? "text-white" : ""
-      }  font-small  ${active ? "bg-primary" : "hover:bg-gray-50/10"}`}
+      }  font-small  ${
+        active ? "bg-primary" : "hover:bg-gray-50/10"
+      } ${className}`}
       {...props}
     >
       {children}

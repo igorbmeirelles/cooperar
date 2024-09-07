@@ -1,17 +1,28 @@
 import { LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
-export type TValidLinks =
+export type TValidNames =
   | "Dashboard"
   | "Controle de fornecimento"
   | "Tabela per capta"
   | "Instituições"
-  | "Culturas";
+  | "Culturas"
+  | "Sair";
+
+export type TValidLink =
+  | "/instituicoes"
+  | "/culturas"
+  | "/tabela-per-capta"
+  | "/"
+  | "/login"
+  | "/controle"
+  | "/percapta"
+  | "";
 
 export class Link {
   constructor(
-    public href: string,
-    public title: TValidLinks,
+    public href: TValidLink,
+    public title: TValidNames,
     public icon: ForwardRefExoticComponent<
       Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
     >
@@ -20,7 +31,7 @@ export class Link {
     this.title = title;
   }
 
-  isActive(aPath: TValidLinks | null) {
+  isActive(aPath: TValidLink | null) {
     return aPath == this.href;
   }
 }
