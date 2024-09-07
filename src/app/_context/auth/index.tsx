@@ -11,6 +11,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
+
 interface IAuthContext {
   user: User | null;
   signIn: (user: IUserSignIn) => Promise<void>;
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children }: IProps) => {
   const saveUserState = useCallback(
     (user: User) => {
       setCookie("auth", "true", {
-        expires: 3600,
+        expires: 1,
         secure: true,
       });
 
