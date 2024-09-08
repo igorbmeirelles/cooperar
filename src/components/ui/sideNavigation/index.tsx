@@ -22,9 +22,8 @@ export function SideNavigation() {
     () => [
       new Link("/home", "Dashboard", LayoutDashboardIcon),
       new Link("/controle", "Controle de fornecimento", PackageIcon),
-      new Link("/percapta", "Tabela per capta", TableIcon),
-      new Link("/instituicoes", "Instituições", BuildingIcon),
       new Link("/culturas", "Culturas", UtensilsCrossed),
+      new Link("/instituicoes", "Instituições", BuildingIcon),
     ],
     []
   );
