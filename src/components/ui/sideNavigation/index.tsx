@@ -20,7 +20,7 @@ import { useAuth } from "@/app/_context/auth";
 export function SideNavigation() {
   const links = useMemo(
     () => [
-      new Link("/", "Dashboard", LayoutDashboardIcon),
+      new Link("/home", "Dashboard", LayoutDashboardIcon),
       new Link("/controle", "Controle de fornecimento", PackageIcon),
       new Link("/percapta", "Tabela per capta", TableIcon),
       new Link("/instituicoes", "Instituições", BuildingIcon),
