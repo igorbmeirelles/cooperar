@@ -8,7 +8,7 @@ export function Institutions() {
   const { someInstitutions } = useInstitutions();
 
   return (
-    <GlassCard className="p-8">
+    <GlassCard className="p-8 backdrop-blur-3xl mb-8">
       <Header />
       <InstitutionsTable someInstitutions={someInstitutions} />
     </GlassCard>
