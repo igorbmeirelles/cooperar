@@ -17,7 +17,7 @@ export type TValidLink =
   | "/login"
   | "/controle"
   | "/percapta"
-  | "";
+  | "/home";
 
 export class Link {
   constructor(
