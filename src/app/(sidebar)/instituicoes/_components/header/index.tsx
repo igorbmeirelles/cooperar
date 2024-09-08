@@ -36,6 +36,25 @@ export function Header() {
     resolver: zodResolver(anInstitutionSchema),
   });
 
+  const handleException = useCallback(
+    (ex: Error) => {
+      if (ex instanceof ApplicationException) {
+        setAlert({
+          title: "Ops. Parece que algo deu errado.",
+          description: ex.message,
+          open: true,
+        });
+      } else {
+        setAlert({
+          title: "Ops. Parece que algo deu errado.",
+          description: "Ocorreu um erro inesperado",
+          open: true,
+        });
+      }
+    },
+    [setAlert]
+  );
+
   const onSubmit = useCallback(
     (anInstitution: IInstitution) => {
       try {
@@ -48,22 +67,10 @@ export function Header() {
         });
         form.reset();
       } catch (ex) {
-        if (ex instanceof ApplicationException) {
-          setAlert({
-            title: "Ops. Parece que algo deu errado.",
-            description: ex.message,
-            open: true,
-          });
-        } else {
-          setAlert({
-            title: "Ops. Parece que algo deu errado.",
-            description: "Ocorreu um erro inesperado",
-            open: true,
-          });
-        }
+        handleException(ex as Error);
       }
     },
-    [addInstitution, setAlert, form]
+    [addInstitution, handleException, form]
   );
 
   const handleCloseAlert = useCallback(() => {
