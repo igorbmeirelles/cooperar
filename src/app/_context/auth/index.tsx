@@ -92,6 +92,7 @@ export const AuthProvider = ({ children }: IProps) => {
     onChange(auth, (user) => {
       if (user) {
         saveUserState(user);
+        return;
       }
       clearState();
     });
