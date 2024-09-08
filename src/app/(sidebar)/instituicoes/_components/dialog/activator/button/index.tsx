@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { forwardRef } from "react";
 
-export function ActivatorButton() {
-  return <Button>Nova Instituição</Button>;
-}
+export const ActivatorButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(function ActivatorButton(props, ref) {
+  return (
+    <Button ref={ref} {...props} data-cy="institutions-add-button">
+      Nova Instituição
+    </Button>
+  );
+});

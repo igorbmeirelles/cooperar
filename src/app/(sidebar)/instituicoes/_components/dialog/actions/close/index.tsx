@@ -4,7 +4,7 @@ import { DialogClose } from "@/components/ui/dialog";
 export function CloseAction() {
   return (
     <DialogClose asChild>
-      <Button variant="secondary">Fechar</Button>
+      <Button variant="secondary" data-cy="institutions-create-dialog-close">Fechar</Button>
     </DialogClose>
   );
 }

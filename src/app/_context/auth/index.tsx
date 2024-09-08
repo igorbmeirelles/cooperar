@@ -85,7 +85,8 @@ export const AuthProvider = ({ children }: IProps) => {
   const signOut = useCallback(async () => {
     await auth.signOut();
     clearState();
-  }, [clearState]);
+    push("/login");
+  }, [clearState, push]);
 
   useEffect(() => {
     onChange(auth, (user) => {

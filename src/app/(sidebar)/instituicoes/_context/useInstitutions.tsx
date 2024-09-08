@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { IInstitution } from "./modes/Institution";
+import { IInstitution } from "./models/Institution";
 import {
   ApplicationException,
   ExceptionCode,
@@ -44,7 +44,7 @@ export function InstitutionsProvider({ children }: IProps) {
 
     if (someInstitutions.some(existentInstitutions)) {
       throw new ApplicationException(
-        "Institution already exists",
+        "Instituição já cadastrada",
         ExceptionCode.VALIDATION
       );
     }

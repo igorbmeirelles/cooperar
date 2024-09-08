@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IInstitution } from "../../_context/modes/Institution";
+import { IInstitution } from "../../_context/models/Institution";
 
 interface IProps {
   someInstitutions: IInstitution[];
@@ -14,7 +14,7 @@ interface IProps {
 
 export function InstitutionsTable({ someInstitutions }: IProps) {
   return (
-    <Table className="mt-4">
+    <Table className="mt-4" data-cy="institutions-table">
       <TableHeader>
         <TableRow>
           <TableHead className="text-white">Nome</TableHead>
@@ -25,9 +25,9 @@ export function InstitutionsTable({ someInstitutions }: IProps) {
       <TableBody>
         {someInstitutions.map((institution) => (
           <TableRow key={institution.email}>
-            <TableCell>{institution.name}</TableCell>
-            <TableCell>{institution.email}</TableCell>
-            <TableCell>{institution.phone}</TableCell>
+            <TableCell data-cy="institutions-table-name">{institution.name}</TableCell>
+            <TableCell data-cy="institutions-table-email">{institution.email}</TableCell>
+            <TableCell data-cy="institutions-table-phone">{institution.phone}</TableCell>
           </TableRow>
         ))}
       </TableBody>

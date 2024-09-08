@@ -31,7 +31,6 @@ const aMiddlewareUtility = {
     return !!request.cookies.get("auth");
   },
   isInSafeRouteWithoutAuthentication: (request: NextRequest) => {
-    console.log(request.cookies.get("auth"), isLoginPage(request));
     return !request.cookies.get("auth") && !isLoginPage(request);
   },
 };

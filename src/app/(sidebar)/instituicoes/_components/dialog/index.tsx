@@ -3,7 +3,7 @@ import { DialogBody } from "./body";
 import { DialogHeader } from "./header";
 import { DialogActivator } from "./activator";
 import { UseFormReturn } from "react-hook-form";
-import { IInstitution } from "../../_context/modes/Institution";
+import { IInstitution } from "../../_context/models/Institution";
 
 interface IProps {
   form: UseFormReturn<IInstitution, any, undefined>;
@@ -12,9 +12,9 @@ interface IProps {
 
 export function Dialog({ form, onSubmit }: IProps) {
   return (
-    <ShadDialog>
+    <ShadDialog onOpenChange={() => form.reset()}>
       <DialogActivator />
-      <DialogContent>
+      <DialogContent data-cy="institutions-create-dialog">
         <DialogHeader />
         <DialogBody form={form} onSubmit={onSubmit} />
       </DialogContent>

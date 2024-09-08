@@ -1,4 +1,3 @@
-import { IInstitution } from "@/app/(sidebar)/instituicoes/_context/modes/Institution";
 import {
   FormControl,
   FormField,
@@ -9,6 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { BuildingIcon } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
+import { IInstitution } from "../../../_context/models/Institution";
 
 interface IProps {
   form: UseFormReturn<IInstitution, any, undefined>;
@@ -25,11 +25,11 @@ export function NameInput({ form }: IProps) {
           <FormControl>
             <div className="flex items-center mb-4">
               <BuildingIcon className="mr-2" />
-              <Input {...field} placeholder="Nome da Instituição" />
+              <Input {...field} placeholder="Nome da Instituição" data-cy="institutions-create-dialog-name" />
             </div>
           </FormControl>
 
-          <FormMessage />
+          <FormMessage data-cy="institutions-create-dialog-name-error" />
         </FormItem>
       )}
     />

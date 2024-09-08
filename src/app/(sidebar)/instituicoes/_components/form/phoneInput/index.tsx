@@ -1,4 +1,3 @@
-import { IInstitution } from "@/app/(sidebar)/instituicoes/_context/modes/Institution";
 import {
   FormControl,
   FormField,
@@ -9,6 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { PhoneIcon } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
+import { IInstitution } from "../../../_context/models/Institution";
 
 interface IProps {
   form: UseFormReturn<IInstitution, any, undefined>;
@@ -25,11 +25,11 @@ export function PhoneInput({ form }: IProps) {
           <FormControl>
             <div className="flex items-center mb-4">
               <PhoneIcon className="mr-2" />
-              <Input {...field} placeholder="Telefone" />
+              <Input {...field} placeholder="Telefone" data-cy="institutions-create-dialog-phone" />
             </div>
           </FormControl>
 
-          <FormMessage />
+          <FormMessage data-cy="institutions-create-dialog-phone-error" />
         </FormItem>
       )}
     />
