@@ -8,7 +8,7 @@ export function Header() {
           <UserInfo.Role>Administrador</UserInfo.Role>
         </UserInfo.NameRoleContainer>
         <UserInfo.Avatar
-          src="/assets/img/bglogin.jpg"
+          src="https://static.tvtropes.org/pmwiki/pub/images/screenshot_2023_02_15_74049_pm.png"
           alt="Imagem de usuário"
         />
       </UserInfo.Root>
