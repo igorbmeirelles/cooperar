@@ -28,7 +28,7 @@ export class Farming implements IFarming {
     high_school: number,
     adults_and_elderly: number,
     manual: string,
-    id: TULId | undefined
+    id: TULId | undefined = undefined
   ) {
     this.id = id ?? ulid();
     this.farming = farming;

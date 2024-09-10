@@ -9,6 +9,7 @@ export function Avatar({ className = "", ...props }: IProps) {
       width={50}
       height={50}
       {...props}
+      alt="User Avatar"
     />
   );
 }

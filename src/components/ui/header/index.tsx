@@ -4,7 +4,7 @@ export function Header() {
     <header className="flex pt-4" data-cy="header">
       <UserInfo.Root>
         <UserInfo.NameRoleContainer>
-          <UserInfo.Name>Manuel da padaria</UserInfo.Name>
+          <UserInfo.Name>Assane Diop</UserInfo.Name>
           <UserInfo.Role>Administrador</UserInfo.Role>
         </UserInfo.NameRoleContainer>
         <UserInfo.Avatar
