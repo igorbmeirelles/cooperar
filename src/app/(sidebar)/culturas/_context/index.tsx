@@ -14,6 +14,8 @@ import {
   ExceptionCode,
 } from "@/app/_abstractions/exceptions";
 
+import farmings from "../_models/farmings.json";
+
 interface FarmingContextType {
   someFarmings: Farming[];
   addFarming: (aFarming: Farming) => void;
@@ -29,7 +31,11 @@ export function FarmingContextProvider({ children }: IProps) {
   const [someFarmings, setSomeFarmings] = useState<Farming[]>([]);
 
   useEffect(() => {
-    setSomeFarmings(JSON.parse(localStorage.getItem("farmings") ?? "[]"));
+    setSomeFarmings(
+      JSON.parse(
+        localStorage.getItem("farmings") ?? JSON.stringify(farmings)
+      ).map((farming: IFarming) => Farming.create(farming))
+    );
   }, []);
 
   const addFarming = useCallback(

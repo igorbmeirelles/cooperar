@@ -14,4 +14,18 @@ export class Institution implements IInstitution {
     this.email = email;
     this.phone = phone;
   }
+
+  toString() {
+    return this.name;
+  }
+
+  static create(institution: IInstitution | undefined) {
+    if (!institution) return undefined;
+
+    return new Institution(
+      institution.name,
+      institution.email,
+      institution.phone
+    );
+  }
 }

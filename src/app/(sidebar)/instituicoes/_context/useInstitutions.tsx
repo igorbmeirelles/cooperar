@@ -12,6 +12,8 @@ import {
   ApplicationException,
   ExceptionCode,
 } from "@/app/_abstractions/exceptions";
+import data from "./models/data.json";
+
 interface IInstitutionContext {
   someInstitutions: IInstitution[];
   addInstitution: (institutions: IInstitution) => void;
@@ -29,7 +31,7 @@ export function InstitutionsProvider({ children }: IProps) {
 
   useEffect(() => {
     const institutions = JSON.parse(
-      localStorage.getItem("institutions") ?? "[]"
+      localStorage.getItem("institutions") ?? JSON.stringify(data)
     );
     setSomeInstitutions(institutions);
   }, []);

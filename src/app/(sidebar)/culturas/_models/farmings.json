@@ -1,0 +1,317 @@
+[
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V2",
+    "farming": "Alface crespa",
+    "pre_school": 20,
+    "elementary_school": 40,
+    "high_school": 40,
+    "adults_and_elderly": 40,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V3",
+    "farming": "Almeirão",
+    "pre_school": 10,
+    "elementary_school": 10,
+    "high_school": 15,
+    "adults_and_elderly": 15,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V4",
+    "farming": "Agrião",
+    "pre_school": 5,
+    "elementary_school": 5,
+    "high_school": 10,
+    "adults_and_elderly": 10,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V5",
+    "farming": "Alho poró",
+    "pre_school": 15,
+    "elementary_school": 20,
+    "high_school": 30,
+    "adults_and_elderly": 30,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V6",
+    "farming": "Abobora",
+    "pre_school": 50,
+    "elementary_school": 55,
+    "high_school": 70,
+    "adults_and_elderly": 70,
+    "manual": "*"
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V7",
+    "farming": "Aipim",
+    "pre_school": 50,
+    "elementary_school": 55,
+    "high_school": 70,
+    "adults_and_elderly": 70,
+    "manual": "*"
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V8",
+    "farming": "Batata doce",
+    "pre_school": 80,
+    "elementary_school": 90,
+    "high_school": 100,
+    "adults_and_elderly": 100,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V9",
+    "farming": "Bertalha",
+    "pre_school": 15,
+    "elementary_school": 20,
+    "high_school": 40,
+    "adults_and_elderly": 40,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V10",
+    "farming": "Berinjela",
+    "pre_school": 80,
+    "elementary_school": 90,
+    "high_school": 100,
+    "adults_and_elderly": 100,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V11",
+    "farming": "Beterraba",
+    "pre_school": 80,
+    "elementary_school": 90,
+    "high_school": 100,
+    "adults_and_elderly": 100,
+    "manual": "*"
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V12",
+    "farming": "Banana",
+    "pre_school": 90,
+    "elementary_school": 100,
+    "high_school": 100,
+    "adults_and_elderly": 100,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V13",
+    "farming": "Cenoura",
+    "pre_school": 25,
+    "elementary_school": 40,
+    "high_school": 55,
+    "adults_and_elderly": 55,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V14",
+    "farming": "Couve",
+    "pre_school": 15,
+    "elementary_school": 27,
+    "high_school": 27,
+    "adults_and_elderly": 27,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V15",
+    "farming": "Chicória",
+    "pre_school": 25,
+    "elementary_school": 35,
+    "high_school": 50,
+    "adults_and_elderly": 50,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V16",
+    "farming": "Espinafre",
+    "pre_school": 15,
+    "elementary_school": 20,
+    "high_school": 40,
+    "adults_and_elderly": 40,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V17",
+    "farming": "Feijão",
+    "pre_school": 20,
+    "elementary_school": 32,
+    "high_school": 52,
+    "adults_and_elderly": 52,
+    "manual": "*"
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V18",
+    "farming": "Jiló",
+    "pre_school": 30,
+    "elementary_school": 50,
+    "high_school": 50,
+    "adults_and_elderly": 50,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V19",
+    "farming": "Mamão",
+    "pre_school": 90,
+    "elementary_school": 100,
+    "high_school": 150,
+    "adults_and_elderly": 150,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V20",
+    "farming": "Melancia",
+    "pre_school": 80,
+    "elementary_school": 145,
+    "high_school": 200,
+    "adults_and_elderly": 200,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V21",
+    "farming": "Melão",
+    "pre_school": 85,
+    "elementary_school": 95,
+    "high_school": 150,
+    "adults_and_elderly": 150,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V22",
+    "farming": "Mostarda",
+    "pre_school": 30,
+    "elementary_school": 50,
+    "high_school": 50,
+    "adults_and_elderly": 50,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V23",
+    "farming": "Peixinho da horta",
+    "pre_school": 15,
+    "elementary_school": 30,
+    "high_school": 30,
+    "adults_and_elderly": 30,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V24",
+    "farming": "Quiabo",
+    "pre_school": 30,
+    "elementary_school": 30,
+    "high_school": 32,
+    "adults_and_elderly": 32,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V25",
+    "farming": "Rabanete",
+    "pre_school": 10,
+    "elementary_school": 20,
+    "high_school": 20,
+    "adults_and_elderly": 20,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V26",
+    "farming": "Repolho",
+    "pre_school": 13,
+    "elementary_school": 25,
+    "high_school": 30,
+    "adults_and_elderly": 30,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V27",
+    "farming": "Rúcula",
+    "pre_school": 13,
+    "elementary_school": 25,
+    "high_school": 30,
+    "adults_and_elderly": 30,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V28",
+    "farming": "Tomate",
+    "pre_school": 25,
+    "elementary_school": 30,
+    "high_school": 50,
+    "adults_and_elderly": 50,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V29",
+    "farming": "Alecrim",
+    "pre_school": 1,
+    "elementary_school": 1,
+    "high_school": 1,
+    "adults_and_elderly": 1,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V30",
+    "farming": "Erva doce",
+    "pre_school": 1,
+    "elementary_school": 1,
+    "high_school": 1,
+    "adults_and_elderly": 1,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V31",
+    "farming": "Hortelã",
+    "pre_school": 3,
+    "elementary_school": 5,
+    "high_school": 5,
+    "adults_and_elderly": 5,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V32",
+    "farming": "Manjericão",
+    "pre_school": 0.5,
+    "elementary_school": 1,
+    "high_school": 1,
+    "adults_and_elderly": 1,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V33",
+    "farming": "Manjerona",
+    "pre_school": 1,
+    "elementary_school": 1,
+    "high_school": 1,
+    "adults_and_elderly": 1,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V34",
+    "farming": "Tomilho",
+    "pre_school": 1,
+    "elementary_school": 1,
+    "high_school": 1,
+    "adults_and_elderly": 1,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V35",
+    "farming": "Salsa",
+    "pre_school": 1,
+    "elementary_school": 1,
+    "high_school": 2,
+    "adults_and_elderly": 2,
+    "manual": ""
+  },
+  {
+    "id": "01F4D6J7Q8N9A6S3R5T2W0E1V36",
+    "farming": "Sálvia",
+    "pre_school": 1,
+    "elementary_school": 1,
+    "high_school": 1,
+    "adults_and_elderly": 1,
+    "manual": ""
+  }
+]
