@@ -9,7 +9,17 @@ const nextConfig = {
         basePath: false,
       },
     ];
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "static.tvtropes.org",
+        port: "",
+        pathname: "/pmwiki/pub/images/",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
