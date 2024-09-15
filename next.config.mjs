@@ -11,14 +11,16 @@ const nextConfig = {
     ];
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "static.tvtropes.org",
         port: "",
-        pathname: "/pmwiki/pub/images/",
+        pathname: "/pmwiki/pub/images/**",
       },
     ],
+    
   },
 };
 
