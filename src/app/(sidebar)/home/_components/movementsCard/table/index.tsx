@@ -4,11 +4,19 @@ import { useSupplies } from "@/app/(sidebar)/controle/_context";
 import { DataTable } from "./data-table";
 import { SupplyControlColumns, supplyControlColumns } from "./columns/columns";
 import { useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 export function Root() {
   const { someSupplies } = useSupplies();
 
-  const onUpdate = useCallback(() => {}, []);
+  const { push } = useRouter();
+
+  const onUpdate = useCallback(
+    (control: SupplyControlColumns) => {
+      push(`/controle/${control.id}`);
+    },
+    [push]
+  );
 
   const data = useMemo(() => {
     const controls = someSupplies

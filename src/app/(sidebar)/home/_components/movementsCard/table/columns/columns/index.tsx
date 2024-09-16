@@ -13,7 +13,7 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
 
 interface IControlActions {
-  onUpdate: (control: Control) => void;
+  onUpdate: (control: SupplyControlColumns) => void;
 }
 
 export class SupplyControlColumns extends Control {
@@ -93,7 +93,7 @@ export const supplyControlColumns: (
     header: "Status",
     cell: ({ row }) => {
       return (
-        <Badge variant={row.original.isCompleted ? "default" : "destructive"}>
+        <Badge variant={row.original.isCompleted ? "default" : "secondary"}>
           {row.original.status}
         </Badge>
       );

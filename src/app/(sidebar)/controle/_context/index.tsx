@@ -13,12 +13,14 @@ interface ISupplyContext {
   someSupplies: ISupply[];
   readSupplies: () => void;
   writeSupply: (aSupply: ISupply) => void;
+  editSupply: (aSupply: ISupply) => void;
 }
 
 const SupplyContext = createContext<ISupplyContext>({
   someSupplies: [],
   readSupplies: () => {},
   writeSupply: () => {},
+  editSupply: () => {},
 });
 
 export const SupplyContextProvider = ({
@@ -48,8 +50,21 @@ export const SupplyContextProvider = ({
     });
   }, []);
 
+  const editSupply = useCallback((aSupply: ISupply) => {
+    setSomeSupplies((prev) => {
+      const newSupplies = prev.map((supply) =>
+        supply.id === aSupply.id ? aSupply : supply
+      );
+
+      localStorage.setItem("supplies", JSON.stringify(newSupplies));
+
+      return newSupplies;
+    });
+  }, []);
   return (
-    <SupplyContext.Provider value={{ someSupplies, readSupplies, writeSupply }}>
+    <SupplyContext.Provider
+      value={{ someSupplies, readSupplies, writeSupply, editSupply }}
+    >
       {children}
     </SupplyContext.Provider>
   );
