@@ -39,9 +39,13 @@ export const SupplyContextProvider = ({
   }, [readSupplies]);
 
   const writeSupply = useCallback((aSupply: ISupply) => {
-    const supplies = JSON.parse(localStorage.getItem("supplies") ?? "[]");
+    setSomeSupplies((prev) => {
+      const newSupplies = [aSupply, ...prev];
 
-    setSomeSupplies([...supplies, aSupply]);
+      localStorage.setItem("supplies", JSON.stringify(newSupplies));
+
+      return newSupplies;
+    });
   }, []);
 
   return (

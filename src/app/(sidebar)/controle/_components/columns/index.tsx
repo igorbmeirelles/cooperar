@@ -99,7 +99,6 @@ export const supplyControlColumns: (
     accessorKey: "actions",
     header: "",
     cell: ({ row }) => {
-      console.log(row.original);
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

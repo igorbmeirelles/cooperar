@@ -20,6 +20,7 @@ export interface IControl {
   institution: IInstitution | undefined;
   supplied: number;
   daysServed: number;
+  isCompleted: boolean;
 }
 
 export class Control implements IControl {
@@ -73,6 +74,15 @@ export class Control implements IControl {
     return (this.supplied * this.plannedDays) / this.total;
   }
 
+  get isCompleted() {
+    return (
+      this.supplied > 0 &&
+      this.daysServed >= 1 &&
+      !!this.date &&
+      !!this.institution
+    );
+  }
+
   static calculateGrossWeightPerCapita(farming: IFarming, ageGroup: IAgeGroup) {
     if (!farming || !ageGroup) return 0;
 
@@ -120,12 +130,14 @@ export class Control implements IControl {
   }
 
   static create(aFormData: IControl) {
+    const date = typeof aFormData.date === "string" ? new Date(aFormData.date) : aFormData.date;
+
     return new Control(
       AgeGroup.create(aFormData.ageGroup),
       Farming.create(aFormData.farming),
       aFormData.numberOfPeople,
       aFormData.plannedDays,
-      aFormData.date,
+      date,
       Institution.create(aFormData.institution),
       aFormData.supplied,
       aFormData.id
@@ -136,6 +148,7 @@ export class Control implements IControl {
 export interface ISupply {
   id: Ulid | undefined;
   controls: IControl[];
+  status: "Concluído" | "Incompleto";
 }
 
 export class Supply implements ISupply {
@@ -144,7 +157,7 @@ export class Supply implements ISupply {
     public id: Ulid | undefined = undefined
   ) {
     this.id = id ?? ulid();
-    this.controls = controls;
+    this.controls = controls.map((control) => Control.create(control));
   }
 
   get planned() {
@@ -153,6 +166,15 @@ export class Supply implements ISupply {
 
   get supplied() {
     return this.controls.reduce((acc, control) => acc + control.supplied, 0);
+  }
+
+  get status() {
+    return this.controls.reduce(
+      (acc, control) => acc && control.isCompleted,
+      true
+    )
+      ? "Concluído"
+      : "Incompleto";
   }
 
   static create(aFormData: ISupply) {

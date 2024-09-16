@@ -57,12 +57,11 @@ import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ageGroup, TAgeGroupKey } from "@/app/_lib/constants";
 import { useInstitutions } from "../instituicoes/_context/useInstitutions";
 import { IControl, Control, Supply } from "./_models";
 import { useSupplies } from "./_context";
-import { write } from "fs";
 
 const schema = z.object({
   id: z.string().optional(),
@@ -87,13 +86,14 @@ const schema = z.object({
     .number()
     .positive("Número de dias planejados deve ser positivo"),
   date: z.coerce.date().optional(),
-  institution: z
-    .object({
+  institution: z.object(
+    {
       name: z.string(),
       email: z.string(),
       phone: z.string(),
-    })
-    .optional(),
+    },
+    { message: "Instituição obrigatória" }
+  ),
   supplied: z.coerce
     .number()
     .nonnegative("Quantidade fornecida deve ser positiva")
