@@ -33,7 +33,7 @@ export function DataCards() {
         <p className="text-2xl font-medium text-white">
           {suppliedControl.toFixed(3)} KG
         </p>
-        <h2 className="text-xl font-medium text-white">Planejado</h2>
+        <h2 className="text-xl font-medium text-white">Fornecido</h2>
       </InfoCard.Root>
       {/* <InfoCard.Root></InfoCard.Root> */}
     </>
