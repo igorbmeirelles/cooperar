@@ -1,7 +1,7 @@
 .bg-login {
-  background: url("../../../public/assets/img/bglogin.jpg") no-repeat center
+  background: url("https://instagram.fsdu13-1.fna.fbcdn.net/v/t39.30808-6/445002911_18016040018340860_4885184730212701909_n.jpg?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE0NDAuc2RyLmYzMDgwOC5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fsdu13-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=0_3hUJvpKowQ7kNvgEoQk7W&_nc_gid=cc65f14ddd0d41a39f79fc2ea2e693e5&edm=APoiHPcAAAAA&ccb=7-5&ig_cache_key=MzM3ODg3MTgxMzM5OTEyMzQzMA%3D%3D.3-ccb7-5&oh=00_AYCIL0J8rS1ktXpgRVcBhrXcxFEU3pLZsonOkCPJ9k56QA&oe=66FCD221&_nc_sid=22de04") no-repeat center
     center;
-  background: url("https://images.unsplash.com/photo-1486754735734-325b5831c3ad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+  background: url("../../../public/assets/img/bglogin-alt.jpg")
     no-repeat center center;
   background-size: cover;
 }
