@@ -30,11 +30,11 @@ export function Header() {
       className="flex-col-reverse md:flex-row gap-4 flex pt-4 items-center"
       data-cy="header"
     >
-      <div className="flex flex-wrap gap-4 xl:hidden">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 xl:hidden">
         {links.map((link) => (
           <Link
             href={link.href}
-            className={`flex gap-2 px-4 py-2 rounded-full ${
+            className={`grid grid-flow-col gap-2 px-4 py-2 rounded-full ${
               link.href == path ? "bg-primary text-white" : "bg-glass"
             }`}
             key={link.href}
