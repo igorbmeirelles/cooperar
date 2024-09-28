@@ -1,7 +1,4 @@
-import {
-  Dialog as ShadDialog,
-  DialogContent,
-} from "@/components/ui/dialog";
+import { Dialog as ShadDialog, DialogContent } from "@/components/ui/dialog";
 
 import { UseFormReturn } from "react-hook-form";
 
