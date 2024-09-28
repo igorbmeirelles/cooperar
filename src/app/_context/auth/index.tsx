@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: IProps) => {
   const [user, setUser] = useState<User | null>(null);
   const { push } = useRouter();
 
-  const { set: setCookie } = useCookies();
+  const { set: setCookie, remove } = useCookies();
 
   const saveUserState = useCallback(
     (user: User) => {
@@ -50,12 +50,9 @@ export const AuthProvider = ({ children }: IProps) => {
   );
 
   const clearState = useCallback(() => {
-    setCookie("auth", "false", {
-      expires: 0,
-      secure: true,
-    });
+    remove("auth");
     setUser(null);
-  }, [setCookie]);
+  }, [remove]);
 
   const signIn = useCallback(
     async ({ email, password }: IUserSignIn) => {

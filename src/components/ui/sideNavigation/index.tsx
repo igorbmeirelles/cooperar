@@ -35,7 +35,7 @@ export function SideNavigation() {
   const { signOut } = useAuth();
 
   return (
-    <Root data-cy="sidebar" className="flex flex-col">
+    <Root data-cy="sidebar" className="flex flex-col max-h-dvh sticky top-0">
       <Header />
       <NavContainer>
         {links.map((link) => (
