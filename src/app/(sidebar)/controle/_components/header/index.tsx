@@ -72,7 +72,7 @@ export function Header({
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between flex-wrap">
       <h1 className="text-medium font-medium">Controle de fornecimento</h1>
       <div className="flex items-center gap-2">
         <Dialog

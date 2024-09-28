@@ -17,7 +17,7 @@ export function Status({ someControls }: IProps) {
   }, [someControls]);
 
   return (
-    <div className="grid grid-cols-4 gap-4 mt-4 mb-8">
+    <div className="grid grid-cols-2 md:grid-cols-4 mt-4 mb-8 gap-4">
       <StatusCard
         icon={BoxIcon}
         display={`${totalControl.toFixed(3)} KG`}

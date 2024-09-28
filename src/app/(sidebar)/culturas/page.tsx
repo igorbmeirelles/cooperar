@@ -10,7 +10,7 @@ export default function PerCapta() {
   const { someFarmings } = useFarmings();
 
   return (
-    <GlassCard className="mb-8">
+    <GlassCard className="mb-8 overflow-auto">
       <Header />
       <DataTable columns={farmingsColumns} data={someFarmings} />
     </GlassCard>

@@ -102,7 +102,7 @@ export function ControlPage({ supply }: IProps) {
   };
 
   return (
-    <GlassCard className="mb-8 overflow-auto backdrop-blur-3xl">
+    <GlassCard className="mb-8 overflow-auto">
       <Header
         open={open}
         setOpen={setOpen}
