@@ -3,7 +3,7 @@ import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export type TValidNames =
   | "Dashboard"
-  | "Controle de fornecimento"
+  | "Controle"
   | "Tabela per capta"
   | "Instituições"
   | "Culturas"

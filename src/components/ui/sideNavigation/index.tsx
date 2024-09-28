@@ -21,7 +21,7 @@ export function SideNavigation() {
   const links = useMemo(
     () => [
       new Link("/home", "Dashboard", LayoutDashboardIcon),
-      new Link("/controle", "Controle de fornecimento", PackageIcon),
+      new Link("/controle", "Controle", PackageIcon),
       new Link("/culturas", "Culturas", UtensilsCrossed),
       new Link("/instituicoes", "Instituições", BuildingIcon),
     ],
@@ -35,7 +35,7 @@ export function SideNavigation() {
   const { signOut } = useAuth();
 
   return (
-    <Root data-cy="sidebar" className="flex flex-col max-h-dvh sticky top-0">
+    <Root data-cy="sidebar" className="hidden xl:flex xl:flex-col max-h-dvh sticky top-0">
       <Header />
       <NavContainer>
         {links.map((link) => (

@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }: IProps) => {
     (user: User) => {
       setCookie("auth", "true", {
         expires: 1,
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
       });
 
       setUser(user);
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }: IProps) => {
         }
 
         saveUserState(credentials.user);
-
+        
         push("/");
       } catch (ex: any) {
         if (ex.code === "auth/invalid-credential") {
