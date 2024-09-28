@@ -51,7 +51,7 @@ export function FarmingContextProvider({ children }: IProps) {
         );
 
       setSomeFarmings((prevFarmings: IFarming[]) => {
-        const newFarmings = [...prevFarmings, aFarming];
+        const newFarmings = [aFarming, ...prevFarmings];
 
         localStorage.setItem("farmings", JSON.stringify(newFarmings));
 

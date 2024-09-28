@@ -52,7 +52,7 @@ export function InstitutionsProvider({ children }: IProps) {
     }
 
     setSomeInstitutions((prev: IInstitution[]) => {
-      const aNewList = [...prev, structuredClone(anInstitution)];
+      const aNewList = [structuredClone(anInstitution), ...prev];
 
       writeInstitutions(aNewList);
       return aNewList;
