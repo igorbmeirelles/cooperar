@@ -17,9 +17,9 @@ export function InstitutionsTable({ someInstitutions }: IProps) {
     <Table className="mt-4" data-cy="institutions-table">
       <TableHeader>
         <TableRow>
-          <TableHead className="text-white">Nome</TableHead>
-          <TableHead className="text-white">Email</TableHead>
-          <TableHead className="text-white">Telefone</TableHead>
+          <TableHead>Nome</TableHead>
+          <TableHead>Email</TableHead>
+          <TableHead>Telefone</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

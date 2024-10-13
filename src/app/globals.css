@@ -22,6 +22,10 @@
   }
 }
 
+body {
+  background-color: #F8F7FA;
+}
+
 .bg-glass {
   background: linear-gradient(
     45deg,

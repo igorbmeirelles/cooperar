@@ -35,7 +35,7 @@ export function Header() {
           <Link
             href={link.href}
             className={`grid grid-flow-col gap-2 px-4 py-2 rounded-full ${
-              link.href == path ? "bg-primary text-white" : "bg-glass"
+              link.href == path ? "bg-primary text-white" : "shadow-xl"
             }`}
             key={link.href}
           >

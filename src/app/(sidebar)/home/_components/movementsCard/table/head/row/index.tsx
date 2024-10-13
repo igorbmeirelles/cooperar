@@ -4,7 +4,7 @@ import { Cell } from "../cell";
 export function Row() {
   return (
     <TableRow>
-      <Cell className="text-white">Instituição</Cell>
+      <Cell>Instituição</Cell>
       <Cell>Planejado</Cell>
       <Cell>Fornecido</Cell>
       <Cell>De</Cell>
