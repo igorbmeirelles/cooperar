@@ -83,7 +83,7 @@ export const supplyControlColumns: (
   },
   {
     accessorKey: "supplied",
-    header: "Planejado",
+    header: "Fornecido",
     cell: ({ row }) => {
       return <div>{row.original.supplied} KG</div>;
     },
