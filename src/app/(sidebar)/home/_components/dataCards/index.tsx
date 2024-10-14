@@ -4,21 +4,10 @@ import { useSupplies } from "@/app/(sidebar)/controle/_context";
 import { InfoCard } from "../infoCard";
 import { BoxIcon, TruckIcon } from "lucide-react";
 import { HistogramChart } from "../histogramChart";
+import { FarmingChart } from "../farmingChart";
 
 export function DataCards() {
   const { someSupplies } = useSupplies();
-
-  const totalControl = someSupplies
-    .map((supply) =>
-      supply.controls.reduce((acc, control) => acc + control.total, 0)
-    )
-    .reduce((acc, supply) => acc + supply, 0);
-
-  const suppliedControl = someSupplies
-    .map((supply) =>
-      supply.controls.reduce((acc, control) => acc + control.supplied, 0)
-    )
-    .reduce((acc, supply) => acc + supply, 0);
 
   return (
     <>
@@ -32,8 +21,11 @@ export function DataCards() {
         <p className="text-2xl font-medium">{suppliedControl.toFixed(3)} KG</p>
         <h2 className="text-xl font-medium">Fornecido</h2>
       </InfoCard.Root> */}
-      <InfoCard.Root className="col-span p-4">
+      <InfoCard.Root className="col-span p-4 h-full flex flex-col justify-between">
         <HistogramChart someSupplies={someSupplies} />
+      </InfoCard.Root>
+      <InfoCard.Root className="col-span p-4 h-full">
+        <FarmingChart someSupplies={someSupplies} />
       </InfoCard.Root>
     </>
   );
