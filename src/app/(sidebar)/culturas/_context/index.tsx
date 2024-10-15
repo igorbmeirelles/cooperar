@@ -15,6 +15,7 @@ import {
 } from "@/app/_abstractions/exceptions";
 
 import farmings from "../_models/farmings.json";
+import { add, read } from "@/lib/adapters/firebase/config";
 
 interface FarmingContextType {
   someFarmings: Farming[];
@@ -31,15 +32,20 @@ export function FarmingContextProvider({ children }: IProps) {
   const [someFarmings, setSomeFarmings] = useState<Farming[]>([]);
 
   useEffect(() => {
-    setSomeFarmings(
-      JSON.parse(
-        localStorage.getItem("farmings") ?? JSON.stringify(farmings)
-      ).map((farming: IFarming) => Farming.create(farming))
-    );
+    // farmings.forEach((farming) => {
+    //   add({ collection_name: "farmings", data: farming, id: farming.id });
+    // });
+    read<IFarming>({ collection_name: "farmings" }).then((result) => {
+      const farmings = result.map(
+        (farming: IFarming) => Farming.create(farming) as Farming
+      );
+
+      setSomeFarmings(farmings);
+    });
   }, []);
 
   const addFarming = useCallback(
-    (aFarming: IFarming) => {
+    async (aFarming: IFarming) => {
       const farmingExists = someFarmings.some(
         (farming: IFarming) => farming.farming === aFarming.farming
       );
@@ -50,10 +56,14 @@ export function FarmingContextProvider({ children }: IProps) {
           ExceptionCode.VALIDATION
         );
 
+      await add({
+        collection_name: "farmings",
+        data: structuredClone(aFarming),
+        id: aFarming.id,
+      });
+
       setSomeFarmings((prevFarmings: IFarming[]) => {
         const newFarmings = [aFarming, ...prevFarmings];
-
-        localStorage.setItem("farmings", JSON.stringify(newFarmings));
 
         return newFarmings;
       });
