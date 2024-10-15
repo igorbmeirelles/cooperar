@@ -44,7 +44,7 @@ export function FarmingChart({ someSupplies }: IProps) {
         }
       });
 
-    var top5 = result.sort((a, b) => b.amount - a.amount).slice(0, 5);
+    const top5 = result.sort((a, b) => b.amount - a.amount).slice(0, 5);
 
     const chartConfig = top5.reduce((acc, farming, index) => {
       acc[farming.id] = {
@@ -65,7 +65,6 @@ export function FarmingChart({ someSupplies }: IProps) {
     };
   }, [someSupplies]);
 
-  console.log(chartData);
   const totalSupplied = useMemo(() => {
     return someSupplies
       .map((supply) => supply.controls)

@@ -149,15 +149,18 @@ export interface ISupply {
   id: Ulid | undefined;
   controls: IControl[];
   status: "Concluído" | "Incompleto";
+  date: Date
 }
 
 export class Supply implements ISupply {
   constructor(
     public controls: IControl[],
-    public id: Ulid | undefined = undefined
+    public id: Ulid | undefined = undefined,
+    public date: Date
   ) {
     this.id = id ?? ulid();
     this.controls = controls.map((control) => Control.create(control));
+    this.date = date
   }
 
   get planned() {
@@ -178,6 +181,6 @@ export class Supply implements ISupply {
   }
 
   static create(aFormData: ISupply) {
-    return new Supply(aFormData.controls, aFormData.id);
+    return new Supply(aFormData.controls, aFormData.id, aFormData.date ?? new Date());
   }
 }

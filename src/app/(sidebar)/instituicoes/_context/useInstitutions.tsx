@@ -7,12 +7,13 @@ import {
   useEffect,
   useState,
 } from "react";
-import { IInstitution } from "./models/Institution";
+import { IInstitution, Institution } from "./models/Institution";
 import {
   ApplicationException,
   ExceptionCode,
 } from "@/app/_abstractions/exceptions";
 import data from "./models/data.json";
+import { add, read } from "@/lib/adapters/firebase/config";
 
 interface IInstitutionContext {
   someInstitutions: IInstitution[];
@@ -30,17 +31,29 @@ export function InstitutionsProvider({ children }: IProps) {
   const [someInstitutions, setSomeInstitutions] = useState<IInstitution[]>([]);
 
   useEffect(() => {
-    const institutions = JSON.parse(
-      localStorage.getItem("institutions") ?? JSON.stringify(data)
-    );
-    setSomeInstitutions(institutions);
+    // data.forEach((data) => {
+    //   add<IInstitution>({ collection_name: "companies", data, id: data.email });
+    // });
+    read<IInstitution>({ collection_name: "companies" }).then((result) => {
+      setSomeInstitutions(
+        result.map(
+          (institution) => Institution.create(institution) as IInstitution
+        )
+      );
+    });
   }, []);
 
-  const writeInstitutions = (anInstitutionsList: IInstitution[]) => {
-    localStorage.setItem("institutions", JSON.stringify(anInstitutionsList));
-  };
+  async function writeInstitution(
+    anInstitutions: IInstitution
+  ): Promise<IInstitution> {
+    return await add<IInstitution>({
+      collection_name: "companies",
+      data: anInstitutions,
+      id: anInstitutions.email,
+    });
+  }
 
-  const addInstitution = (anInstitution: IInstitution) => {
+  const addInstitution = async (anInstitution: IInstitution) => {
     const existentInstitutions = (anExistentInstitution: IInstitution) =>
       anInstitution.email === anExistentInstitution.email;
 
@@ -51,11 +64,10 @@ export function InstitutionsProvider({ children }: IProps) {
       );
     }
 
-    setSomeInstitutions((prev: IInstitution[]) => {
-      const aNewList = [structuredClone(anInstitution), ...prev];
+    await writeInstitution(anInstitution);
 
-      writeInstitutions(aNewList);
-      return aNewList;
+    setSomeInstitutions((prev: IInstitution[]) => {
+      return [anInstitution as IInstitution, ...prev];
     });
   };
 
