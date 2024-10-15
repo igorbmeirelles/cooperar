@@ -54,46 +54,40 @@ export const AuthProvider = ({ children }: IProps) => {
     setUser(null);
   }, [remove]);
 
-  const signIn = useCallback(
-    async ({ email, password }: IUserSignIn) => {
-      try {
-        const credentials = await fireSignIn(auth, email, password);
+  const signIn = useCallback(async ({ email, password }: IUserSignIn) => {
+    try {
+      const credentials = await fireSignIn(auth, email, password);
 
-        if (!credentials.user) {
-          throw new Error("Credenciais inválidas");
-        }
-
-        saveUserState(credentials.user);
-        
-        push("/");
-      } catch (ex: any) {
-        if (ex.code === "auth/invalid-credential") {
-          throw new Error("Credenciais inválidas");
-        }
-
-        throw new Error(
-          "Ocorreu um erro ao tentar autenticar, por favor, tente mais tarde."
-        );
+      if (!credentials.user) {
+        throw new Error("Credenciais inválidas");
       }
-    },
-    [push, saveUserState]
-  );
+    } catch (ex: any) {
+      if (ex.code === "auth/invalid-credential") {
+        throw new Error("Credenciais inválidas");
+      }
+
+      throw new Error(
+        "Ocorreu um erro ao tentar autenticar, por favor, tente mais tarde."
+      );
+    }
+  }, []);
 
   const signOut = useCallback(async () => {
     await auth.signOut();
     clearState();
-    push("/login");
-  }, [clearState, push]);
+  }, [clearState]);
 
   useEffect(() => {
     onChange(auth, (user) => {
       if (user) {
         saveUserState(user);
+        push("/");
         return;
       }
       clearState();
+      push("/login");
     });
-  }, [saveUserState, clearState]);
+  }, [push, saveUserState, clearState]);
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut }}>

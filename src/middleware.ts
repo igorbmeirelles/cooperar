@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export default function middleware(request: NextRequest) {
-  if (aMiddlewareUtility.isInSafeRouteWithoutAuthentication(request))
-    return NextResponse.redirect(new URL("/login", request.url));
+  // if (aMiddlewareUtility.isInSafeRouteWithoutAuthentication(request))
+  //   return NextResponse.redirect(new URL("/login", request.url));
 
-  if (aMiddlewareUtility.isLoginPathWithAuthentication(request))
-    return NextResponse.redirect(new URL("/", request.url));
+  // if (aMiddlewareUtility.isLoginPathWithAuthentication(request))
+  //   return NextResponse.redirect(new URL("/", request.url));
 
   return NextResponse.next({
     headers: aMiddlewareUtility.getCustomHeaders(request),
