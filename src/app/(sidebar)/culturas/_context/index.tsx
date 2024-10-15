@@ -35,7 +35,10 @@ export function FarmingContextProvider({ children }: IProps) {
     // farmings.forEach((farming) => {
     //   add({ collection_name: "farmings", data: farming, id: farming.id });
     // });
-    read<IFarming>({ collection_name: "farmings" }).then((result) => {
+    read<IFarming>({
+      collection_name: "farmings",
+      orderBy: [{ direction: "asc", field: "farming" }],
+    }).then((result) => {
       const farmings = result.map(
         (farming: IFarming) => Farming.create(farming) as Farming
       );
