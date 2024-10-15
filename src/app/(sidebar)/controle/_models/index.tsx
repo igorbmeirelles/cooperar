@@ -5,6 +5,7 @@ import {
   Institution,
 } from "../../instituicoes/_context/models/Institution";
 import { ulid } from "ulid";
+import { Timestamp } from "firebase/firestore";
 
 type Ulid = string;
 
@@ -130,7 +131,12 @@ export class Control implements IControl {
   }
 
   static create(aFormData: IControl) {
-    const date = typeof aFormData.date === "string" ? new Date(aFormData.date) : aFormData.date;
+    const date =
+      aFormData.date instanceof Timestamp
+        ? aFormData.date.toDate()
+        : typeof aFormData.date === "string"
+        ? new Date(aFormData.date)
+        : aFormData.date;
 
     return new Control(
       AgeGroup.create(aFormData.ageGroup),
@@ -149,7 +155,7 @@ export interface ISupply {
   id: Ulid | undefined;
   controls: IControl[];
   status: "Concluído" | "Incompleto";
-  date: Date
+  date: Date;
 }
 
 export class Supply implements ISupply {
@@ -160,7 +166,7 @@ export class Supply implements ISupply {
   ) {
     this.id = id ?? ulid();
     this.controls = controls.map((control) => Control.create(control));
-    this.date = date
+    this.date = date;
   }
 
   get planned() {
@@ -181,6 +187,12 @@ export class Supply implements ISupply {
   }
 
   static create(aFormData: ISupply) {
-    return new Supply(aFormData.controls, aFormData.id, aFormData.date ?? new Date());
+    const date = aFormData.date
+      ? aFormData.date instanceof Timestamp
+        ? aFormData.date.toDate()
+        : new Date(aFormData.date)
+      : new Date();
+
+    return new Supply(aFormData.controls, aFormData.id, date);
   }
 }

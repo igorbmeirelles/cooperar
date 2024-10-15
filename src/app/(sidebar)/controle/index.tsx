@@ -92,11 +92,11 @@ export function ControlPage({ supply }: IProps) {
 
   const saveControls = () => {
     if (supply) {
-      editSupply(new Supply(someControls, supply.id));
+      editSupply(new Supply(someControls, supply.id, supply.date));
       return;
     }
 
-    writeSupply(new Supply(someControls));
+    writeSupply(new Supply(someControls, undefined, new Date()));
 
     setSomeControls([]);
   };

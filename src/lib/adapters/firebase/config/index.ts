@@ -9,13 +9,16 @@ import {
 } from "firebase/auth";
 
 import {
-  addDoc,
+  where as Where,
+  orderBy as OrderBy,
+  WhereFilterOp,
   collection,
   doc,
   getDocs,
   getFirestore,
   query,
   setDoc,
+  OrderByDirection,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -53,10 +56,20 @@ export async function add<T>({
 
 export async function read<T>({
   collection_name,
+  where = [],
+  orderBy = [],
 }: {
   collection_name: string;
+  where?: { field: string; operator: WhereFilterOp; value: string }[];
+  orderBy?: { field: string; direction: OrderByDirection }[];
 }): Promise<T[]> {
-  const q = query(collection(db, collection_name));
+  const q = query(
+    collection(db, collection_name),
+    ...where?.map((filter) =>
+      Where(filter.field, filter.operator, filter.value)
+    ),
+    ...orderBy.map((filter) => OrderBy(filter.field, filter.direction))
+  );
   const querySnapshot = await getDocs(q);
 
   const result = [] as T[];

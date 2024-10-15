@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { ISupply, Supply } from "../_models";
+import { add, read } from "@/lib/adapters/firebase/config";
 
 interface ISupplyContext {
   someSupplies: ISupply[];
@@ -31,32 +32,44 @@ export const SupplyContextProvider = ({
   const [someSupplies, setSomeSupplies] = useState<ISupply[]>([]);
 
   const readSupplies = useCallback(() => {
-    const supplies = JSON.parse(localStorage.getItem("supplies") ?? "[]");
-
-    setSomeSupplies(supplies.map((supply: ISupply) => Supply.create(supply)));
+    // const supplies = JSON.parse(localStorage.getItem("supplies") ?? "[]");
+    read<ISupply>({
+      collection_name: "supplies",
+      orderBy: [{ direction: "desc", field: "date" }],
+    }).then((response) => {
+      setSomeSupplies(response.map((supply: ISupply) => Supply.create(supply)));
+    });
   }, []);
 
   useEffect(() => {
     readSupplies();
   }, [readSupplies]);
 
-  const writeSupply = useCallback((aSupply: ISupply) => {
+  const writeSupply = useCallback(async (aSupply: ISupply) => {
+    await add<ISupply>({
+      collection_name: "supplies",
+      data: structuredClone(aSupply),
+      id: aSupply.id,
+    });
+
     setSomeSupplies((prev) => {
       const newSupplies = [aSupply, ...prev];
-
-      localStorage.setItem("supplies", JSON.stringify(newSupplies));
 
       return newSupplies;
     });
   }, []);
 
-  const editSupply = useCallback((aSupply: ISupply) => {
+  const editSupply = useCallback(async (aSupply: ISupply) => {
+    await add({
+      collection_name: "supplies",
+      data: structuredClone(aSupply),
+      id: aSupply.id,
+    });
+
     setSomeSupplies((prev) => {
       const newSupplies = prev.map((supply) =>
         supply.id === aSupply.id ? aSupply : supply
       );
-
-      localStorage.setItem("supplies", JSON.stringify(newSupplies));
 
       return newSupplies;
     });
