@@ -34,7 +34,7 @@ export function InstitutionsProvider({ children }: IProps) {
     // data.forEach((data) => {
     //   add<IInstitution>({ collection_name: "companies", data, id: data.email });
     // });
-    read<IInstitution>({ collection_name: "companies" }).then((result) => {
+    read<IInstitution>({ collection_name: "companies", orderBy: [{direction: "asc", field: "name"}] }).then((result) => {
       setSomeInstitutions(
         result.map(
           (institution) => Institution.create(institution) as IInstitution
