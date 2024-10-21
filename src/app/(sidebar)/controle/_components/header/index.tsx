@@ -42,7 +42,7 @@ export function Header({
         undefined,
         0,
         0,
-        undefined,
+        null,
         undefined,
         0,
         undefined
@@ -62,7 +62,7 @@ export function Header({
           undefined,
           0,
           0,
-          undefined,
+          null,
           undefined,
           0,
           undefined

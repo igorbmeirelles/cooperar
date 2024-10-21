@@ -49,6 +49,7 @@ export async function add<T>({
   data: T;
   id?: string;
 }): Promise<T> {
+  debugger
   const docRef = await setDoc(doc(db, collection_name, id ?? ""), data as any);
 
   return docRef as T;

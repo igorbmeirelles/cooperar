@@ -9,7 +9,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 
 interface IAuthContext {
@@ -77,17 +77,21 @@ export const AuthProvider = ({ children }: IProps) => {
     clearState();
   }, [clearState]);
 
+  const path = usePathname();
+
   useEffect(() => {
     onChange(auth, (user) => {
       if (user) {
         saveUserState(user);
-        push("/");
+
+        if (path == "/login") push("/");
+
         return;
       }
       clearState();
       push("/login");
     });
-  }, [push, saveUserState, clearState]);
+  }, [path, push, saveUserState, clearState]);
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut }}>

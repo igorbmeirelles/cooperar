@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Logo from "../../../../public/assets/img/logo-alt.png"
+
 
 export function Header() {
   const links = useMemo(
@@ -51,7 +53,7 @@ export function Header() {
           <UserInfo.Role>Administrador</UserInfo.Role>
         </UserInfo.NameRoleContainer>
         <UserInfo.Avatar
-          src=""
+          src={Logo}
           alt="Imagem de usuário"
         />
       </UserInfo.Root>

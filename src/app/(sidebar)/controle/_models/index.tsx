@@ -17,7 +17,7 @@ export interface IControl {
   numberOfPeople: number;
   plannedDays: number;
   total: number;
-  date: Date | undefined;
+  date: Date | null;
   institution: IInstitution | undefined;
   supplied: number;
   daysServed: number;
@@ -30,7 +30,7 @@ export class Control implements IControl {
   farming: IFarming | undefined;
   numberOfPeople: number;
   plannedDays: number;
-  date: Date | undefined;
+  date: Date | null;
   institution: IInstitution | undefined;
   supplied: number;
 
@@ -39,7 +39,7 @@ export class Control implements IControl {
     farming: IFarming | undefined,
     numberOfPeople: number,
     plannedDays: number,
-    date: Date | undefined,
+    date: Date | null,
     institution: IInstitution | undefined,
     supplied: number,
     id: Ulid | undefined

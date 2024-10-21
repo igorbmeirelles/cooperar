@@ -19,6 +19,12 @@ const nextConfig = {
         port: "",
         pathname: "/pmwiki/pub/images/**",
       },
+      {
+        protocol: "https",
+        hostname: 'cooperar.org.br',
+        port: "",
+        pathname: "/wp-content/uploads/2020/10/**"
+      }
     ],
     
   },

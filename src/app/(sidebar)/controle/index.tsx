@@ -62,7 +62,7 @@ export function ControlPage({ supply }: IProps) {
       undefined,
       0,
       0,
-      undefined,
+      null,
       undefined,
       0,
       undefined
@@ -90,13 +90,13 @@ export function ControlPage({ supply }: IProps) {
 
   const { writeSupply, editSupply } = useSupplies();
 
-  const saveControls = () => {
+  const saveControls = async () => {
     if (supply) {
-      editSupply(new Supply(someControls, supply.id, supply.date));
+      await editSupply(new Supply(someControls, supply.id, supply.date));
       return;
     }
 
-    writeSupply(new Supply(someControls, undefined, new Date()));
+    await writeSupply(new Supply(someControls, undefined, new Date()));
 
     setSomeControls([]);
   };
