@@ -4,6 +4,7 @@ import { Root } from "./root";
 import { Header } from "./table/head";
 import { Title } from "./title";
 import { Root as Table } from "./table";
+import { DateFilter } from "./data_filter";
 export const MovementCard = {
   Root,
   Title,
@@ -11,6 +12,7 @@ export const MovementCard = {
     EditButton,
   },
   Chip,
+  DateFilter,
   Table: {
     Root: Table,
     Header,

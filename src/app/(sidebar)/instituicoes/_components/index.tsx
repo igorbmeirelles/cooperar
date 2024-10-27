@@ -34,7 +34,13 @@ export function Institutions() {
 
   const onOpenChange = useCallback(() => {
     setDialogOpen(!dialogOpen);
-  }, [dialogOpen, setDialogOpen]);
+    form.reset({
+      name: "",
+      email: `${ulid()}@email.com`,
+      phone: "",
+      isActive: true,
+    })
+  }, [dialogOpen, setDialogOpen, form]);
 
   const onEdit = useCallback((email: string) => {
     const institution = someInstitutions.find((i) => i.email === email);

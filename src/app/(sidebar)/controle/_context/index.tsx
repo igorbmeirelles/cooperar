@@ -9,12 +9,16 @@ import {
 } from "react";
 import { ISupply, Supply } from "../_models";
 import { add, read } from "@/lib/adapters/firebase/config";
+import { addDays } from "date-fns";
+import { DateRange } from "react-day-picker";
 
 interface ISupplyContext {
   someSupplies: ISupply[];
   readSupplies: () => void;
   writeSupply: (aSupply: ISupply) => void;
   editSupply: (aSupply: ISupply) => void;
+  dateRange: DateRange | undefined;
+  setDateRange: (aDateRange: DateRange | undefined) => void;
 }
 
 const SupplyContext = createContext<ISupplyContext>({
@@ -22,6 +26,11 @@ const SupplyContext = createContext<ISupplyContext>({
   readSupplies: () => {},
   writeSupply: () => {},
   editSupply: () => {},
+  dateRange: {
+    from: addDays(new Date(Date.now()), -90),
+    to: new Date(),
+  },
+  setDateRange: () => {},
 });
 
 export const SupplyContextProvider = ({
@@ -30,16 +39,28 @@ export const SupplyContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [someSupplies, setSomeSupplies] = useState<ISupply[]>([]);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>({
+    from: addDays(new Date(Date.now()), -90),
+    to: new Date(),
+  });
 
   const readSupplies = useCallback(() => {
     // const supplies = JSON.parse(localStorage.getItem("supplies") ?? "[]");
     read<ISupply>({
       collection_name: "supplies",
       orderBy: [{ direction: "desc", field: "date" }],
+      where: [
+        {
+          field: "date",
+          operator: ">=",
+          value: dateRange?.from ?? addDays(new Date(Date.now()), -90),
+        },
+        { field: "date", operator: "<=", value: dateRange?.to ?? new Date() },
+      ],
     }).then((response) => {
       setSomeSupplies(response.map((supply: ISupply) => Supply.create(supply)));
     });
-  }, []);
+  }, [dateRange]);
 
   useEffect(() => {
     readSupplies();
@@ -76,7 +97,14 @@ export const SupplyContextProvider = ({
   }, []);
   return (
     <SupplyContext.Provider
-      value={{ someSupplies, readSupplies, writeSupply, editSupply }}
+      value={{
+        someSupplies,
+        readSupplies,
+        writeSupply,
+        editSupply,
+        dateRange,
+        setDateRange,
+      }}
     >
       {children}
     </SupplyContext.Provider>

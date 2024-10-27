@@ -7,6 +7,7 @@ export default function HomePage() {
       <DataCards />
       <MovementCard.Root className="shadow-2xl">
         <MovementCard.Title>Últimas movimentações</MovementCard.Title>
+        <MovementCard.DateFilter />
         <MovementCard.Table.Root />
       </MovementCard.Root>
     </main>
