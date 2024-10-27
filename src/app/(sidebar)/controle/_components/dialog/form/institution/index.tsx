@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 
 import { Building2Icon } from "lucide-react";
+import { useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
 
 interface IProps {
@@ -28,6 +29,11 @@ interface IProps {
 
 export function InstitutionSelect({ form }: IProps) {
   const { someInstitutions } = useInstitutions();
+
+  const onlyActive = useMemo(
+    () => someInstitutions.filter((institution) => institution.isActive),
+    [someInstitutions]
+  );
 
   return (
     <FormField
@@ -57,7 +63,7 @@ export function InstitutionSelect({ form }: IProps) {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Instituição</SelectLabel>
-                    {someInstitutions.map((institution) => (
+                    {onlyActive.map((institution) => (
                       <SelectItem
                         value={institution.email}
                         key={institution.email}

@@ -1,6 +1,5 @@
 import { UseFormReturn } from "react-hook-form";
 import { IInstitution } from "../../../_context/models/Institution";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   FormControl,
   FormField,
