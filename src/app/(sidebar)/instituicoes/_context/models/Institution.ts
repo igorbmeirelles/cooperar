@@ -2,17 +2,20 @@ export interface IInstitution {
   name: string;
   email: string;
   phone: string;
+  isActive: boolean;
 }
 
 export class Institution implements IInstitution {
   name: string;
   email: string;
   phone: string;
+  isActive: boolean;
 
-  constructor(name: string, email: string, phone: string) {
+  constructor(name: string, email: string, phone: string, isActive: boolean) {
     this.name = name;
     this.email = email;
     this.phone = phone;
+    this.isActive = isActive;
   }
 
   toString() {
@@ -25,7 +28,8 @@ export class Institution implements IInstitution {
     return new Institution(
       institution.name,
       institution.email,
-      institution.phone
+      institution.phone,
+      institution.isActive ?? true
     );
   }
 }

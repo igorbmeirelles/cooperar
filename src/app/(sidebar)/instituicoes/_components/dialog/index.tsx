@@ -8,11 +8,15 @@ import { IInstitution } from "../../_context/models/Institution";
 interface IProps {
   form: UseFormReturn<IInstitution, any, undefined>;
   onSubmit: (data: IInstitution) => void;
+  open: boolean;
+  handleOpenChange: () => void;
 }
 
-export function Dialog({ form, onSubmit }: IProps) {
+export function Dialog({ form, onSubmit, handleOpenChange, open }: IProps) {
+
+
   return (
-    <ShadDialog onOpenChange={() => form.reset()}>
+    <ShadDialog open={open} onOpenChange={handleOpenChange}>
       <DialogActivator />
       <DialogContent data-cy="institutions-create-dialog">
         <DialogHeader />

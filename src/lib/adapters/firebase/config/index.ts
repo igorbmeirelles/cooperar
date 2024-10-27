@@ -49,7 +49,6 @@ export async function add<T>({
   data: T;
   id?: string;
 }): Promise<T> {
-  debugger
   const docRef = await setDoc(doc(db, collection_name, id ?? ""), data as any);
 
   return docRef as T;
@@ -61,7 +60,7 @@ export async function read<T>({
   orderBy = [],
 }: {
   collection_name: string;
-  where?: { field: string; operator: WhereFilterOp; value: string }[];
+  where?: { field: string; operator: WhereFilterOp; value: string | boolean }[];
   orderBy?: { field: string; direction: OrderByDirection }[];
 }): Promise<T[]> {
   const q = query(

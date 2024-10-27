@@ -1,18 +1,14 @@
 import { Dialog } from "../dialog";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { useInstitutions } from "../../_context/useInstitutions";
 import { IInstitution } from "../../_context/models/Institution";
-import { z } from "zod";
+
 import { Alert } from "../alert";
 import { useCallback, useState } from "react";
 import { ApplicationException } from "@/app/_abstractions/exceptions";
-
-const anInstitutionSchema = z.object({
-  name: z.string().min(3, "Nome deve ter pelo menos 3 caracteres."),
-  email: z.string().email("Email inválido."),
-  phone: z.string().min(8, "Telefone deve ter pelo menos 8 caracteres."),
-});
+import { set } from "date-fns";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ActiveCheck } from "../form/filter/active";
 
 interface IAlert {
   title: string;
@@ -20,24 +16,23 @@ interface IAlert {
   open: boolean;
 }
 
-export function Header() {
-  const { addInstitution } = useInstitutions();
+interface IProps {
+  open: boolean;
+  setOpen: (openState: boolean) => void;
+  form: UseFormReturn<IInstitution, any, undefined>;
+}
+
+export function Header({ open, setOpen, form }: IProps) {
+  const { addInstitution, onlyActive, setOnlyActive } = useInstitutions();
   const [alert, setAlert] = useState<IAlert>({
     title: "",
     description: "",
     open: false,
   });
-  const form = useForm<IInstitution>({
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-    },
-    resolver: zodResolver(anInstitutionSchema),
-  });
 
   const handleException = useCallback(
     (ex: Error) => {
+      console.error(ex);
       if (ex instanceof ApplicationException) {
         setAlert({
           title: "Ops. Parece que algo deu errado.",
@@ -56,21 +51,36 @@ export function Header() {
   );
 
   const onSubmit = useCallback(
-    (anInstitution: IInstitution) => {
+    async (anInstitution: IInstitution) => {
       try {
-        addInstitution(structuredClone(anInstitution));
+        const { operation } = await addInstitution(
+          structuredClone(anInstitution)
+        );
+
+        if (operation === "add") {
+          setAlert({
+            title: "Cadastro realizado com sucesso!",
+            description: "A instituição foi cadastrada.",
+            open: true,
+          });
+
+          setOpen(false);
+
+          form.reset();
+
+          return;
+        }
 
         setAlert({
-          title: "Cadastro realizado com sucesso!",
-          description: "A instituição foi cadastrada.",
+          title: "Cadastro atualizado com sucesso!",
+          description: "A instituição foi atualizada.",
           open: true,
         });
-        form.reset();
       } catch (ex) {
         handleException(ex as Error);
       }
     },
-    [addInstitution, handleException, form]
+    [addInstitution, setOpen, handleException, form]
   );
 
   const handleCloseAlert = useCallback(() => {
@@ -81,10 +91,23 @@ export function Header() {
     });
   }, []);
 
+  const handleOpenChange = useCallback(() => {
+    setOpen(!open);
+    form.reset();
+  }, [form, open, setOpen]);
+
   return (
     <div className="flex items-center justify-between">
-      <h1 className="font-medium">Instituições</h1>
-      <Dialog form={form} onSubmit={onSubmit} />
+      <div>
+        <h1 className="font-medium">Instituições</h1>
+        <ActiveCheck active={onlyActive} setActive={setOnlyActive} />
+      </div>
+      <Dialog
+        form={form}
+        onSubmit={onSubmit}
+        open={open}
+        handleOpenChange={handleOpenChange}
+      />
       <Alert
         open={alert.open}
         description={alert.description}
