@@ -19,12 +19,14 @@ import { add, read } from "@/lib/adapters/firebase/config";
 
 interface FarmingContextType {
   someFarmings: Farming[];
-  addFarming: (aFarming: Farming) => void;
+  addFarming: (aFarming: Farming) => Promise<void>;
+  updateFarming: (aFarming: Farming) => Promise<void>;
 }
 
 const context = createContext<FarmingContextType>({
   someFarmings: [],
-  addFarming: () => {},
+  addFarming: async () => {},
+  updateFarming: async () => {},
 });
 
 interface IProps extends PropsWithChildren<{}> {}
@@ -74,8 +76,24 @@ export function FarmingContextProvider({ children }: IProps) {
     [someFarmings]
   );
 
+  const updateFarming = useCallback(async (aFarming: IFarming) => {
+    await add({
+      collection_name: "farmings",
+      data: structuredClone(aFarming),
+      id: aFarming.id,
+    });
+
+    setSomeFarmings((prevFarmings: IFarming[]) => {
+      const newFarmings = prevFarmings.map((farming) =>
+        farming.id === aFarming.id ? aFarming : farming
+      );
+
+      return newFarmings;
+    });
+  }, []);
+
   return (
-    <context.Provider value={{ someFarmings, addFarming }}>
+    <context.Provider value={{ someFarmings, addFarming, updateFarming }}>
       {children}
     </context.Provider>
   );

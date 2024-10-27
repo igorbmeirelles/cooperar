@@ -1,35 +1,19 @@
-import { useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { Dialog, IFarmingForm } from "../dialog";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useCallback, useState } from "react";
 import { Alert } from "../alert";
 import { ApplicationException } from "@/app/_abstractions/exceptions";
 import { useFarmings } from "../../_context";
 import { Farming } from "../../_models";
 
-const schema = z.object({
-  farming: z.string().min(3, "Cultura deve ter no mínimo 3 caracteres"),
-  pre_school: z.coerce.number().positive("Deve ser um número positivo"),
-  elementary_school: z.coerce.number().positive("Deve ser um número positivo"),
-  high_school: z.coerce.number().positive("Deve ser um número positivo"),
-  adults_and_elderly: z.coerce.number().positive("Deve ser um número positivo"),
-  manual: z.string(),
-});
+interface IProps {
+  form: UseFormReturn<IFarmingForm, any, undefined>;
+  open: boolean;
+  handleOpenChange: () => void;
+}
 
-export function Header() {
-  const form = useForm<IFarmingForm>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      farming: "",
-      pre_school: 0,
-      elementary_school: 0,
-      high_school: 0,
-      adults_and_elderly: 0,
-      manual: "",
-    },
-  });
-  const { addFarming } = useFarmings();
+export function Header({ form, open, handleOpenChange }: IProps) {
+  const { addFarming, updateFarming } = useFarmings();
 
   const [alert, setAlert] = useState({
     title: "",
@@ -43,9 +27,32 @@ export function Header() {
   );
 
   const onSubmit = useCallback(
-    (values: IFarmingForm) => {
+    async (values: IFarmingForm) => {
       try {
-        addFarming(
+        if (form.getValues().id) {
+          await updateFarming(
+            new Farming(
+              values.farming,
+              values.pre_school,
+              values.elementary_school,
+              values.high_school,
+              values.adults_and_elderly,
+              values.manual,
+              form.getValues().id
+            )
+          );
+
+          setAlert((prev) => ({
+            ...prev,
+            title: "Cultura atualizada",
+            description: "Cultura atualizada com sucesso",
+            isOpen: true,
+          }));
+
+          return
+        }
+
+        await addFarming(
           new Farming(
             values.farming,
             values.pre_school,
@@ -63,6 +70,7 @@ export function Header() {
           isOpen: true,
         }));
 
+        handleOpenChange();
         form.reset();
       } catch (ex: any) {
         console.log(ex);
@@ -86,13 +94,18 @@ export function Header() {
         }));
       }
     },
-    [form, addFarming]
+    [form, addFarming, updateFarming, handleOpenChange]
   );
 
   return (
     <div className="flex items-center justify-between mb-4">
       <h1 className="text-medium font-medium">Tabela Per capita</h1>
-      <Dialog form={form} onSubmit={onSubmit} />
+      <Dialog
+        form={form}
+        onSubmit={onSubmit}
+        open={open}
+        handleOpenChange={handleOpenChange}
+      />
       <Alert
         isOpen={alert.isOpen}
         title={alert.title}

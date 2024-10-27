@@ -9,6 +9,7 @@ import { Activator } from "./activator";
 import { Header } from "./header";
 
 export interface IFarmingForm {
+  id: string;
   farming: string;
   pre_school: number;
   elementary_school: number;
@@ -20,11 +21,13 @@ export interface IFarmingForm {
 interface IProps {
   form: UseFormReturn<IFarmingForm, any, undefined>;
   onSubmit: (data: IFarmingForm) => void;
+  open: boolean
+  handleOpenChange: () => void
 }
 
-export function Dialog({ form, onSubmit }: IProps) {
+export function Dialog({ form, onSubmit, open, handleOpenChange }: IProps) {
   return (
-    <ShadDialog onOpenChange={() => form.reset()}>
+    <ShadDialog open={open} onOpenChange={handleOpenChange}>
       <Activator />
       <DialogContent aria-describedby="farming-dialog" data-cy="farming-dialog" className="sm:max-w-[425px]">
         <Header />

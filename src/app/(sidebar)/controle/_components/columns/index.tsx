@@ -94,7 +94,6 @@ export const supplyControlColumns: (
       return <span>{row.original.daysServed.toFixed(0)} dias</span>;
     },
   },
-
   {
     accessorKey: "actions",
     header: "",
