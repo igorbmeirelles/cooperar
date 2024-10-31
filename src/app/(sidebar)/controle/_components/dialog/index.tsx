@@ -7,12 +7,13 @@ import { IControl } from "../../_models";
 import { Body } from "./body";
 import { Header } from "./header";
 import { Activator } from "./activator";
+import { IControlForm } from "../..";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
   open: boolean;
   handleOpenChange: () => void;
-  onSubmit: (aFormData: IControl) => void;
+  onSubmit: (aFormData: IControlForm) => void;
 }
 
 export function Dialog({ form, handleOpenChange, open, onSubmit }: IProps) {

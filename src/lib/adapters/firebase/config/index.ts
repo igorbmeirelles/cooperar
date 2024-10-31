@@ -63,7 +63,6 @@ export async function read<T>({
   where?: { field: string; operator: WhereFilterOp; value: string | boolean | Date }[];
   orderBy?: { field: string; direction: OrderByDirection }[];
 }): Promise<T[]> {
-  console.log("where", where);
   const q = query(
     collection(db, collection_name),
     ...where?.map((filter) =>

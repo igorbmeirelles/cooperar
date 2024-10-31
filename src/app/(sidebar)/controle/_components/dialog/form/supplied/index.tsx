@@ -1,3 +1,4 @@
+import { IControlForm } from "@/app/(sidebar)/controle";
 import { IControl } from "@/app/(sidebar)/controle/_models";
 
 import {
@@ -13,14 +14,16 @@ import { TruckIcon } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
+  name: any;
+  disabled?: boolean;
 }
 
-export function SuppliedInput({ form }: IProps) {
+export function SuppliedInput({ form, name, disabled }: IProps) {
   return (
     <FormField
       control={form.control}
-      name="supplied"
+      name={name}
       render={({ field }) => (
         <FormItem className="mb-4">
           <FormLabel>Quantidade fornecida (Kg)</FormLabel>
@@ -31,6 +34,7 @@ export function SuppliedInput({ form }: IProps) {
                 {...field}
                 type="number"
                 placeholder="Quantidade fornecida"
+                disabled={disabled}
               />
             </div>
           </FormControl>

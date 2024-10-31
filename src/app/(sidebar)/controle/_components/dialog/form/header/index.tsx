@@ -1,26 +1,33 @@
-import { Control, IControl } from "@/app/(sidebar)/controle/_models";
+import { IControlForm } from "@/app/(sidebar)/controle";
+import { Control } from "@/app/(sidebar)/controle/_models";
 import { BoxIcon, Tally5Icon, UserIcon } from "lucide-react";
 import { useMemo } from "react";
 import { UseFormReturn, useWatch } from "react-hook-form";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
+  nameFields: {
+    numberOfPeople: any;
+    plannedDays: any;
+    ageGroup: any;
+    supplied: any;
+  };
 }
 
-export function FormHeader({ form }: IProps) {
+export function FormHeader({ form, nameFields }: IProps) {
   const numberOfPeople = useWatch({
     control: form.control,
-    name: "numberOfPeople",
+    name: nameFields.numberOfPeople,
   });
 
   const plannedDays = useWatch({
     control: form.control,
-    name: "plannedDays",
+    name: nameFields.plannedDays,
   });
 
   const ageGroupValue = useWatch({
     control: form.control,
-    name: "ageGroup",
+    name: nameFields.ageGroup,
   });
 
   const farming = useWatch({
@@ -30,7 +37,7 @@ export function FormHeader({ form }: IProps) {
 
   const supplied = useWatch({
     control: form.control,
-    name: "supplied",
+    name: nameFields.supplied,
   });
 
   const totalDialog = useMemo(() => {
@@ -57,7 +64,7 @@ export function FormHeader({ form }: IProps) {
   }, [farming, ageGroupValue]);
 
   return (
-    <div className="gap-2 mb-4 border-b border-t py-4 mb-2">
+    <div className="gap-2 border-b border-t py-4 mb-2">
       <h2 className="text-sm font-regular flex items-center mb-2">
         <UserIcon className="w-4 h-4 mr-2" />
         {grossWeightPerCapitaDialog.toFixed(3)}

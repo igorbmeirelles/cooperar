@@ -1,35 +1,35 @@
-import { IControl } from "@/app/(sidebar)/controle/_models";
-
 import { UseFormReturn } from "react-hook-form";
 
-import { AgeGroupSelect } from "../age-group";
 import { FarmingSelect } from "../farming";
-import { NumberOfPeopleInput } from "../../number-of-people";
-import { PlannedDaysInput } from "../planned-days";
-import { DateInput } from "../date";
+
 import { InstitutionSelect } from "../institution";
-import { SuppliedInput } from "../supplied";
+
+import { IControlForm } from "@/app/(sidebar)/controle";
+
+import { AdultsAndElderlyCard } from "../aldults_and_elderly";
+import { HighSchoolCard } from "../high_school";
+import { ElementarySchoolCard } from "../elementary_school";
+import { PreSchoolCard } from "../pre_school";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
 }
 
 export function FormFields({ form }: IProps) {
   return (
     <>
-      <AgeGroupSelect form={form} />
+      {/* <AgeGroupSelect form={form} /> */}
+      <InstitutionSelect form={form} />
 
       <FarmingSelect form={form} />
 
-      <NumberOfPeopleInput form={form} />
+      <PreSchoolCard form={form} />
 
-      <PlannedDaysInput form={form} />
+      <ElementarySchoolCard form={form} />
 
-      <DateInput form={form} />
+      <HighSchoolCard form={form} />
 
-      <InstitutionSelect form={form} />
-
-      <SuppliedInput form={form} />
+      <AdultsAndElderlyCard form={form} />
     </>
   );
 }

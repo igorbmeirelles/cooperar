@@ -1,3 +1,4 @@
+import { IControlForm } from "@/app/(sidebar)/controle";
 import { IControl } from "@/app/(sidebar)/controle/_models";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -22,14 +23,16 @@ import { CalendarIcon } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
+  name: any;
+  disabled?: boolean;
 }
 
-export function DateInput({ form }: IProps) {
+export function DateInput({ form, name, disabled }: IProps) {
   return (
     <FormField
       control={form.control}
-      name="date"
+      name={name}
       render={({ field }) => (
         <FormItem className="mb-4">
           <FormLabel>Data do fornecimento</FormLabel>
@@ -45,6 +48,7 @@ export function DateInput({ form }: IProps) {
                       !field.value && "text-muted-foreground"
                     )}
                     type="button"
+                    disabled={disabled}
                   >
                     {field.value ? (
                       format(field.value, "dd/MM/yyyy")

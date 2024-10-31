@@ -1,3 +1,4 @@
+import { IControlForm } from "@/app/(sidebar)/controle";
 import { IControl } from "@/app/(sidebar)/controle/_models";
 import { useInstitutions } from "@/app/(sidebar)/instituicoes/_context/useInstitutions";
 
@@ -24,7 +25,7 @@ import { useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
 }
 
 export function InstitutionSelect({ form }: IProps) {

@@ -8,25 +8,32 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { UsersIcon } from "lucide-react";
-import { IControl } from "../../../_models";
 import { UseFormReturn } from "react-hook-form";
+import { IControlForm } from "../../..";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
+  name: any;
+  disabled?: boolean;
 }
 
-export function NumberOfPeopleInput({ form }: IProps) {
+export function NumberOfPeopleInput({ form, name, disabled }: IProps) {
   return (
     <FormField
       control={form.control}
-      name="numberOfPeople"
+      name={name}
       render={({ field }) => (
         <FormItem className="mb-4">
           <FormLabel>Número de pessoas</FormLabel>
           <FormControl>
             <div className="flex items-center mb-4">
               <UsersIcon className="mr-2" />
-              <Input {...field} type="number" placeholder="Número de pessoas" />
+              <Input
+                {...field}
+                disabled={disabled}
+                type="number"
+                placeholder="Número de pessoas"
+              />
             </div>
           </FormControl>
 

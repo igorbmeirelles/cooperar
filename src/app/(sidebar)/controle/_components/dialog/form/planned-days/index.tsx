@@ -1,3 +1,4 @@
+import { IControlForm } from "@/app/(sidebar)/controle";
 import { IControl } from "@/app/(sidebar)/controle/_models";
 
 import {
@@ -10,17 +11,19 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Tally5Icon } from "lucide-react";
-import { UseFormReturn } from "react-hook-form";
+import { FieldPath, UseFormReturn } from "react-hook-form";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
+  name: any;
+  disabled?: boolean;
 }
 
-export function PlannedDaysInput({ form }: IProps) {
+export function PlannedDaysInput({ form, name, disabled }: IProps) {
   return (
     <FormField
       control={form.control}
-      name="plannedDays"
+      name={name}
       render={({ field }) => (
         <FormItem className="mb-4">
           <FormLabel>Número de dias planejados</FormLabel>
@@ -30,6 +33,7 @@ export function PlannedDaysInput({ form }: IProps) {
               <Input
                 {...field}
                 type="number"
+                disabled={disabled}
                 placeholder="Número de dias planejados"
               />
             </div>

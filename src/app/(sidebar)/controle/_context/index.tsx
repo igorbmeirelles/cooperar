@@ -15,8 +15,8 @@ import { DateRange } from "react-day-picker";
 interface ISupplyContext {
   someSupplies: ISupply[];
   readSupplies: () => void;
-  writeSupply: (aSupply: ISupply) => void;
-  editSupply: (aSupply: ISupply) => void;
+  writeSupply: (aSupply: ISupply) => Promise<void>;
+  editSupply: (aSupply: ISupply) => Promise<void>;
   dateRange: DateRange | undefined;
   setDateRange: (aDateRange: DateRange | undefined) => void;
 }
@@ -24,8 +24,8 @@ interface ISupplyContext {
 const SupplyContext = createContext<ISupplyContext>({
   someSupplies: [],
   readSupplies: () => {},
-  writeSupply: () => {},
-  editSupply: () => {},
+  writeSupply: async () => {},
+  editSupply: async () => {},
   dateRange: {
     from: addDays(new Date(Date.now()), -90),
     to: new Date(),

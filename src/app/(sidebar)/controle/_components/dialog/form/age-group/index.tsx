@@ -1,4 +1,4 @@
-import { IControl } from "@/app/(sidebar)/controle/_models";
+import { IControlForm } from "@/app/(sidebar)/controle";
 import { ageGroup, TAgeGroupKey } from "@/app/_lib/constants";
 
 import {
@@ -22,7 +22,7 @@ import { UsersIcon } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 
 interface IProps {
-  form: UseFormReturn<IControl, any, undefined>;
+  form: UseFormReturn<IControlForm, any, undefined>;
 }
 
 export function AgeGroupSelect({ form }: IProps) {

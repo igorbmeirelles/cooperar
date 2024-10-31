@@ -47,11 +47,11 @@ export class Control implements IControl {
     this.id = id ?? ulid();
     this.ageGroup = ageGroup;
     this.farming = farming;
-    this.numberOfPeople = numberOfPeople;
-    this.plannedDays = plannedDays;
+    this.numberOfPeople = Number(numberOfPeople);
+    this.plannedDays = Number(plannedDays);
     this.date = date;
     this.institution = institution;
-    this.supplied = supplied;
+    this.supplied = Number(supplied);
   }
 
   get grossWeightPerCapita() {
