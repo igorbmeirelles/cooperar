@@ -5,7 +5,7 @@ import { useState } from "react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { DataTable } from "./_components/data-table";
 import { supplyControlColumns } from "./_components/columns";
-import { IControl, Control, ISupply, Supply } from "./_models";
+import { IControl, ISupply, Supply } from "./_models";
 
 import { useForm } from "react-hook-form";
 import { Status } from "./_components/status";
@@ -17,6 +17,8 @@ import { IFarming } from "../culturas/_models";
 import { IInstitution } from "../instituicoes/_context/models/Institution";
 
 import * as yup from "yup";
+import { Alert } from "@/components/ui/alert";
+import { useRouter } from "next/navigation";
 
 const schema = yup.object().shape({
   farming: yup
@@ -319,19 +321,73 @@ export function ControlPage({ supply }: IProps) {
 
   const { writeSupply, editSupply } = useSupplies();
 
+  const [alert, setAlert] = useState({
+    isOpen: false,
+    title: "Controle salvo/atualizado com sucesso!",
+    description: "O controle foi salvo/atualizado com sucesso!",
+  });
+
+  const { push } = useRouter();
+
   const saveControls = async () => {
-    if (supply) {
-      await editSupply(new Supply(someControls, supply.id, supply.date));
-      return;
+    try {
+      if (someControls.length === 0)
+        return setAlert((prev) => ({
+          ...prev,
+          title: "Não foi possível salvar controle",
+          description:
+            "Para que seja possível salvar deve haver ao menos 1 controle.",
+          isOpen: true,
+        }));
+
+      if (supply) {
+        await editSupply(new Supply(someControls, supply.id, supply.date));
+
+        return setAlert((prev) => ({
+          ...prev,
+          isOpen: true,
+          title: "Controle salvo/atualizado com sucesso!",
+          description: "O controle foi salvo/atualizado com sucesso!",
+        }));
+      }
+
+      const newSupply = new Supply(someControls, undefined, new Date());
+
+      await writeSupply(newSupply);
+
+      setAlert((prev) => ({
+        ...prev,
+        isOpen: true,
+        title: "Controle salvo/atualizado com sucesso!",
+        description: "O controle foi salvo/atualizado com sucesso!",
+      }));
+
+      setSomeControls([]);
+
+      newSupply.id && push(`/controle/${newSupply.id}`);
+    } catch (ex) {
+      console.error(ex);
+      setAlert((prev) => ({
+        ...prev,
+        isOpen: true,
+        title: "Erro ao salvar/atualizar controle",
+        description:
+          "Ocorreu um erro ao salvar/atualizar controle, tente novamente mais tarde.",
+      }));
     }
-
-    await writeSupply(new Supply(someControls, undefined, new Date()));
-
-    setSomeControls([]);
   };
 
   return (
     <GlassCard className="mb-8 overflow-auto">
+      <Alert
+        isOpen={alert.isOpen}
+        description={alert.description}
+        title={alert.title}
+        onChange={() =>
+          setAlert((prev) => ({ ...prev, isOpen: !alert.isOpen }))
+        }
+      />
+
       <Header
         open={open}
         setOpen={setOpen}
