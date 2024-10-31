@@ -9,7 +9,7 @@ describe("should display institutions page", () => {
     cy.visit("/instituicoes");
 
     const instituicoes = [
-      new Institution("Escola A", "escolaA@gmail.com", "1111-1111"),
+      new Institution("Escola A", "escolaA@gmail.com", "1111-1111", true),
     ];
 
     cy.window()
