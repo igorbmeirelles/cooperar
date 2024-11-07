@@ -28,6 +28,10 @@ interface IProps {
 }
 
 export function DateInput({ form, name, disabled }: IProps) {
+  
+  const limit = new Date()
+  limit.setDate(new Date().getDate() - 1)
+
   return (
     <>
       <FormField
@@ -65,7 +69,7 @@ export function DateInput({ form, name, disabled }: IProps) {
                   selected={field.value || undefined}
                   onSelect={field.onChange}
                   disabled={(date) =>
-                    !(date > new Date()) || date < new Date("1900-01-01")
+                    !(date >= limit) || date < new Date("1900-01-01")
                   }
                   initialFocus
                 />
