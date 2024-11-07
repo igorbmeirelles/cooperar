@@ -60,7 +60,7 @@ export async function read<T>({
   orderBy = [],
 }: {
   collection_name: string;
-  where?: { field: string; operator: WhereFilterOp; value: string | boolean | Date | any }[];
+  where?: { field: string; operator: WhereFilterOp; value: string | boolean | Date }[];
   orderBy?: { field: string; direction: OrderByDirection }[];
 }): Promise<T[]> {
   const q = query(
