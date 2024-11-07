@@ -167,7 +167,7 @@ const schema = yup.object().shape({
       .optional()
       .when("active", {
         is: (val: boolean) => val === true,
-        then: (schema) => schema.min(0, "Deve ser um valor positivo"),
+        then: (schema) => schema.positive("Deve ser um valor positivo"),
       }),
     plannedDays: yup.number().when("active", {
       is: (val: boolean) => val === true,
