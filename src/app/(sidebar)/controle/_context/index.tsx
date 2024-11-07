@@ -91,7 +91,6 @@ export const SupplyContextProvider = ({
       orderBy: [{ direction: "desc", field: "date" }],
       where: filters,
     }).then((response) => {
-      console.log(response);
       setSomeSupplies(response.map((supply: ISupply) => Supply.create(supply)));
     });
   }, [filters]);

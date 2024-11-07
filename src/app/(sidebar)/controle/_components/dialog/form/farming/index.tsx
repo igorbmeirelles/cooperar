@@ -1,5 +1,4 @@
 import { IControlForm } from "@/app/(sidebar)/controle";
-import { IControl } from "@/app/(sidebar)/controle/_models";
 import { useFarmings } from "@/app/(sidebar)/culturas/_context";
 
 import {
