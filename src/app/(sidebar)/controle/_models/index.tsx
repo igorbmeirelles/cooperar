@@ -6,6 +6,7 @@ import {
 } from "../../instituicoes/_context/models/Institution";
 import { ulid } from "ulid";
 import { Timestamp } from "firebase/firestore";
+import { number } from "yup";
 
 type Ulid = string;
 
@@ -151,11 +152,73 @@ export class Control implements IControl {
   }
 }
 
+export interface IGroupedControls {
+  controls: IControl[];
+  total: number;
+  supplied: number;
+  date: Date;
+  farming: IFarming | undefined;
+  institution: IInstitution | undefined;
+  numberOfPeople: number;
+  supplyId?: Ulid | undefined;
+  isCompleted: boolean;
+  status: "Concluído" | "Incompleto";
+}
+
+export class GroupedControls implements IGroupedControls {
+  controls: IControl[];
+  supplyId?: string | undefined;
+  constructor(controls: IControl[], supplyId: string | undefined = undefined) {
+    this.controls = controls;
+    this.supplyId = supplyId;
+  }
+
+  get total() {
+    return this.controls.reduce((acc, control) => acc + control.total, 0);
+  }
+
+  get supplied() {
+    return this.controls.reduce((acc, control) => acc + control.supplied, 0);
+  }
+
+  get date() {
+    return new Date(
+      Math.min(...this.controls.map((control) => control.date?.getTime() ?? 0))
+    );
+  }
+
+  get farming() {
+    return this.controls[0].farming;
+  }
+
+  get institution() {
+    return this.controls[0].institution;
+  }
+
+  get numberOfPeople() {
+    return this.controls.reduce(
+      (acc, control) => acc + control.numberOfPeople,
+      0
+    );
+  }
+
+  get isCompleted() {
+    return this.controls.reduce(
+      (acc, control) => acc && control.isCompleted,
+      true
+    );
+  }
+
+  get status() {
+    return this.isCompleted ? "Concluído" : "Incompleto";
+  }
+}
 export interface ISupply {
   id: Ulid | undefined;
   controls: IControl[];
   status: "Concluído" | "Incompleto";
   date: Date;
+  groupedControls: IGroupedControls[];
 }
 
 export class Supply implements ISupply {
@@ -184,6 +247,23 @@ export class Supply implements ISupply {
     )
       ? "Concluído"
       : "Incompleto";
+  }
+
+  get groupedControls() {
+    const groupedControls = this.controls.reduce((acc, control) => {
+      const key = `${control.farming?.farming}-${control.institution?.email}`;
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+
+      acc[key].push(control);
+
+      return acc;
+    }, {} as Record<string, IControl[]>);
+
+    return Object.values(groupedControls).map(
+      (controls) => new GroupedControls(controls, this.id)
+    );
   }
 
   static create(aFormData: ISupply) {

@@ -14,14 +14,57 @@ import {
 } from "@/components/ui/popover";
 import { ptBR } from "date-fns/locale";
 import { useSupplies } from "@/app/(sidebar)/controle/_context";
+import { FileSpreadsheet } from "lucide-react";
+import { utils, write } from "xlsx";
 
-export function DateFilter({
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const { dateRange: date, setDateRange: setDate } = useSupplies();
+interface IProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+export function DateFilter({ className }: IProps) {
+  const {
+    dateRange: date,
+    setDateRange: setDate,
+    someSupplies,
+  } = useSupplies();
+
+  const handleExportToExcel = () => {
+    const data = someSupplies.flatMap((supply) => {
+      return supply.groupedControls;
+    });
+
+    const csv = data.map((row) => {
+      return {
+        Instituição: row.institution?.name,
+        Cultura: row.farming?.farming,
+        "Previsto (soma)": row.total,
+        "Fornecido (soma)": row.supplied,
+        Data: row.date,
+        Lote: row.supplyId,
+      };
+    });
+
+    const workSheet = utils.json_to_sheet(csv);
+    const workBook = utils.book_new();
+
+    utils.book_append_sheet(workBook, workSheet, "Sheet 1");
+
+    const base64 = write(workBook, { type: "base64", bookType: "xlsx" });
+
+    const link = document.createElement("a");
+    link.href = `data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,${base64}`;
+    link.download = `Planilha de fornecimento.xlsx`;
+    link.click();
+  };
 
   return (
     <div className={cn("grid gap-2", className)}>
+      <div className="ml-auto">
+        <Button onClick={handleExportToExcel} variant="default">
+          <FileSpreadsheet size={16} className="mr-2" />
+          Exportar para Excel
+        </Button>
+      </div>
       <Popover>
         <PopoverTrigger asChild>
           <Button

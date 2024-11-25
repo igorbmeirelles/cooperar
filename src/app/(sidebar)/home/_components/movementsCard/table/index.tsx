@@ -2,9 +2,10 @@
 
 import { useSupplies } from "@/app/(sidebar)/controle/_context";
 import { DataTable } from "./data-table";
-import { SupplyControlColumns, supplyControlColumns } from "./columns/columns";
+import { supplyControlColumns } from "./columns/columns";
 import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { GroupedControls } from "@/app/(sidebar)/controle/_models";
 
 export function Root() {
   const { someSupplies } = useSupplies();
@@ -12,20 +13,16 @@ export function Root() {
   const { push } = useRouter();
 
   const onUpdate = useCallback(
-    (control: SupplyControlColumns) => {
-      push(`/controle/${control.id}`);
+    (control: GroupedControls) => {
+      push(`/controle/${control.supplyId}`);
     },
     [push]
   );
 
   const data = useMemo(() => {
-    const controls = someSupplies
-      .map((supply) => {
-        return supply.controls.map((control) => {
-          return SupplyControlColumns.from(control, supply.id);
-        });
-      })
-      .flat();
+    const controls = someSupplies.flatMap((supply) => {
+      return supply.groupedControls;
+    });
 
     return controls;
   }, [someSupplies]);

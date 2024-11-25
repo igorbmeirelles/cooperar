@@ -7,67 +7,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
-import { IControl } from "../../_models";
+import { IGroupedControls } from "../../_models";
 
 interface IControlActions {
-  onUpdate: (control: IControl) => void;
-  onDelete: (control: IControl) => void;
+  onUpdate: (control: IGroupedControls) => void;
+  onDelete: (control: IGroupedControls) => void;
 }
 
 export const supplyControlColumns: (
   actions: IControlActions
-) => ColumnDef<IControl>[] = (actions: IControlActions) => [
-  {
-    accessorKey: "ageGroup",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Faixa Etária
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
+) => ColumnDef<IGroupedControls>[] = (actions: IControlActions) => [
   {
     accessorKey: "farming",
     header: "Alimento",
-  },
-  {
-    accessorKey: "grossWeightPerCapita",
-    header: "Peso Bruto Per Capita",
-    cell: ({ row }) => {
-      return <span>{row.original.grossWeightPerCapita.toFixed(2)} kg</span>;
-    },
-  },
-  {
-    accessorKey: "numberOfPeople",
-    header: "Número de Pessoas",
-  },
-  {
-    accessorKey: "plannedDays",
-    header: "Dias Planejados",
-    cell: ({ row }) => {
-      return <span>{row.original.plannedDays} dias</span>;
-    },
-  },
-  {
-    accessorKey: "total",
-    header: "Total",
-    cell: ({ row }) => {
-      return <span>{row.original.total.toFixed(2)} kg</span>;
-    },
-  },
-  {
-    accessorKey: "date",
-    header: "Data",
-    cell: ({ row }) => {
-      return <span>{row?.original?.date?.toLocaleDateString() ?? ""}</span>;
-    },
   },
   {
     accessorKey: "institution",
@@ -81,6 +35,17 @@ export const supplyControlColumns: (
     },
   },
   {
+    accessorKey: "numberOfPeople",
+    header: "Número de Pessoas",
+  },
+  {
+    accessorKey: "total",
+    header: "Total",
+    cell: ({ row }) => {
+      return <span>{row.original.total.toFixed(2)} kg</span>;
+    },
+  },
+  {
     accessorKey: "supplied",
     header: "Fornecido",
     cell: ({ row }) => {
@@ -88,10 +53,10 @@ export const supplyControlColumns: (
     },
   },
   {
-    accessorKey: "daysServed",
-    header: "Dias Atendidos",
+    accessorKey: "date",
+    header: "Data",
     cell: ({ row }) => {
-      return <span>{row.original.daysServed.toFixed(0)} dias</span>;
+      return <span>{row?.original?.date?.toLocaleDateString() ?? ""}</span>;
     },
   },
   {

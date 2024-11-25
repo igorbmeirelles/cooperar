@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { GlassCard } from "@/components/ui/GlassCard";
 import { DataTable } from "./_components/data-table";
 import { supplyControlColumns } from "./_components/columns";
-import { IControl, ISupply, Supply } from "./_models";
+import { GroupedControls, IControl, IGroupedControls, ISupply, Supply } from "./_models";
 
 import { useForm } from "react-hook-form";
 import { Status } from "./_components/status";
@@ -239,20 +239,17 @@ export function ControlPage({ supply }: IProps) {
     supply?.controls || []
   );
 
-  const onDeleteRequest = (aControl: IControl) => {
+  const onDeleteRequest = (someControls: IGroupedControls) => {
     setSomeControls((prev) =>
-      prev.filter((control) => control.id !== aControl.id)
+      prev.filter((control) => someControls.controls.some((c) => c.id !== control.id))
     );
   };
 
   const [open, setOpen] = useState(false);
 
-  const onUpdateRequest = (aControl: IControl) => {
-    const controls = someControls.filter(
-      (control) =>
-        control.institution?.email === aControl.institution?.email &&
-        control.farming?.farming === aControl.farming?.farming
-    );
+  const onUpdateRequest = (someControls: IGroupedControls) => {
+    const controls = someControls.controls;
+
     const pre_school_control = controls.find(
       (control) => control.ageGroup?.key === "pre_school"
     );
@@ -271,8 +268,8 @@ export function ControlPage({ supply }: IProps) {
 
     form.reset(
       new ControlForm(
-        aControl.farming,
-        aControl.institution,
+        someControls.farming,
+        someControls.institution,
         pre_school_control
           ? new AgeGroupControl(
               ageGroup.pre_school,
@@ -377,6 +374,24 @@ export function ControlPage({ supply }: IProps) {
     }
   };
 
+  const groupedControls = useMemo(() => {
+    const controls = someControls.reduce((acc, control) => {
+      const key = `${control.institution?.email}-${control.farming?.farming}`;
+
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+
+      acc[key].push(control);
+
+      return acc;
+    }, {} as Record<string, IControl[]>);
+
+    return Object.values(controls).map((controls) => {
+      return new GroupedControls(controls);
+    });
+  }, [someControls]);
+
   return (
     <GlassCard className="mb-8 overflow-auto">
       <Alert
@@ -404,7 +419,7 @@ export function ControlPage({ supply }: IProps) {
           onDelete: onDeleteRequest,
           onUpdate: onUpdateRequest,
         })}
-        data={someControls}
+        data={groupedControls}
       />
     </GlassCard>
   );

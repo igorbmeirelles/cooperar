@@ -1,4 +1,4 @@
-import { Control, IControl, Supply } from "@/app/(sidebar)/controle/_models";
+import { Control, GroupedControls, IControl, IGroupedControls, Supply } from "@/app/(sidebar)/controle/_models";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,43 +13,18 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
 
 interface IControlActions {
-  onUpdate: (control: SupplyControlColumns) => void;
+  onUpdate: (control: IGroupedControls) => void;
 }
 
-export class SupplyControlColumns extends Control {
-  id: string | undefined;
-
-  private constructor(control: IControl, id: string | undefined) {
-    super(
-      control.ageGroup,
-      control.farming,
-      control.numberOfPeople,
-      control.plannedDays,
-      control.date,
-      control.institution,
-      control.supplied,
-      control.id
-    );
-    this.id = id;
-  }
-
-  get status() {
-    return this.isCompleted ? "Concluído" : "Incompleto";
-  }
-
-  static from(control: Control, id: string | undefined) {
-    return new SupplyControlColumns(control, id);
-  }
-}
 
 export const supplyControlColumns: (
   actions: IControlActions
-) => ColumnDef<SupplyControlColumns>[] = (actions: IControlActions) => [
+) => ColumnDef<IGroupedControls>[] = (actions: IControlActions) => [
   {
     accessorKey: "id",
     header: "Lote",
     cell: ({ row }) => {
-      return <div>{row.original.id}</div>;
+      return <div>{row.original.supplyId}</div>;
     },
   },
   {
@@ -68,10 +43,24 @@ export const supplyControlColumns: (
     },
   },
   {
-    accessorKey: "daysServed",
-    header: "Dias Servidos",
+    accessorKey: "farming",
+    header: "Alimento",
     cell: ({ row }) => {
-      return <div>{row.original.daysServed.toFixed(0)}</div>;
+      return <div>{row.original.farming?.farming}</div>;
+    },
+  },
+  {
+    accessorKey: "total",
+    header: "Total",
+    cell: ({ row }) => {
+      return <div>{row.original.total.toFixed(3)} KG</div>;
+    },
+  },
+  {
+    accessorKey: "supplied",
+    header: "Fornecido",
+    cell: ({ row }) => {
+      return <div>{row.original.supplied.toFixed(3)} KG</div>;
     },
   },
   {
@@ -79,13 +68,6 @@ export const supplyControlColumns: (
     header: "Em",
     cell: ({ row }) => {
       return <div>{row.original.date !== undefined ? row.original.date?.toLocaleDateString() : ""}</div>;
-    },
-  },
-  {
-    accessorKey: "supplied",
-    header: "Fornecido",
-    cell: ({ row }) => {
-      return <div>{row.original.supplied} KG</div>;
     },
   },
   {
