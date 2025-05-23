@@ -44,7 +44,7 @@ export const ageGroup: TAgeGroup = Object.freeze({
   high_school: new AgeGroup("Ensino Médio", "16-18", "high_school"),
   adults_and_elderly: new AgeGroup(
     "Adultos e Idosos",
-    "16-19",
+    "19-",
     "adults_and_elderly"
   ),
 });

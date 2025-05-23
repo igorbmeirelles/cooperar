@@ -19,7 +19,7 @@ export function AdultsAndElderlyCard({ form }: IProps) {
       <CardHeader>
         <h3 className="flex">
           <UsersIcon className="mr-2" />
-          Adultos e idosos (16-18 anos)
+          Adultos e idosos (19- anos)
         </h3>
 
         <FormHeader

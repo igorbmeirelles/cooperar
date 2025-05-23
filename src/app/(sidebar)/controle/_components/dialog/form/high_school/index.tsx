@@ -19,7 +19,7 @@ export function HighSchoolCard({ form }: IProps) {
       <CardHeader>
         <h3 className="flex">
           <GraduationCapIcon className="mr-2" />
-          Ensino médio (6-15 anos)
+          Ensino médio (16-18 anos)
         </h3>
 
         <FormHeader
