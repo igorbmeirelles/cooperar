@@ -19,7 +19,7 @@ export function ElementarySchoolCard({ form }: IProps) {
       <CardHeader>
         <h3 className="flex">
           <BackpackIcon className="mr-2" />
-          Ensino fundamental (6-15 anos)
+          Ensino fundamental (6-14 anos)
         </h3>
 
         <FormHeader
