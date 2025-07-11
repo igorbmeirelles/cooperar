@@ -38,13 +38,13 @@ export const ageGroup: TAgeGroup = Object.freeze({
   pre_school: new AgeGroup("Pré-Escola", "4-5", "pre_school"),
   elementary_school: new AgeGroup(
     "Ensino Fundamental",
-    "6-15",
+    "6-14",
     "elementary_school"
   ),
-  high_school: new AgeGroup("Ensino Médio", "16-18", "high_school"),
+  high_school: new AgeGroup("Ensino Médio", "15-17", "high_school"),
   adults_and_elderly: new AgeGroup(
     "Adultos e Idosos",
-    "19-",
+    "18+",
     "adults_and_elderly"
   ),
 });
